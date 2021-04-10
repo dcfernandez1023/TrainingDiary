@@ -4,6 +4,10 @@
 
 # dependencies
 /training-diary-frontend/node_modules
+/training-diary-frontend/functions
+/training-diary-frontend/firestore.indexes.json
+/training-diary-frontend/firestore.rules
+/training-diary-frontend/storage.rules
 training-diary-frontend/.pnp
 .pnp.js
 
