@@ -1,6 +1,11 @@
 # TrainingDiary
 
-A web application that allows you to track, analyze, and receive insights on your workout data.
+## Description
+This is a web application that allows you to digitally journal and view your workout data. The main goal of this application is to provide what I like to call "instinctive trainers" with a way to track, view, analyze, their workout data.
+
+Many avid gym-goers don't always follow a set-in-stone workout plan, where they plan a 6 month exercise schedule and adhere to it. Though some may follow a structured workout plan, many people like to go the gym and sort of dynamically plan their workout based on what they feel like doing that day. However, due to this dynamic planning, it makes it more difficult to track the workouts that they do and visualize any progress that they make unless they do it manually in a notebook or type it out on a document afterwards, like how a lot of old-school lifters had done in the past.
+
+And that is the problem that this application works to solve - to make it less mechanical for these "instinctive trainers" (like myself) to document their workouts and progress.  
 
 ## Project Structure
 The main directories and files of this application:
@@ -34,4 +39,4 @@ Technologies Used:
 - Flask
 - Sqlite3
 
-`training-diary-backend` contains all the files for the python backend to operate. The `blueprints` directory contains the endpoints that the Flask app will expose as well as the logic behind each endpoint. 
+`training-diary-backend` contains all the files for the python backend to operate. The `blueprints` directory contains the endpoints that the Flask app will expose as well as the logic behind each endpoint.
