@@ -9,6 +9,9 @@ class TestAssertion:
         self.__num_success = 0
         self.__total_tests = 1
 
+    def print_test_name(self, name):
+        print("\n------ " + name + " ------\n")
+
     def assert_test_failure(self, test_name):
         tb = traceback.format_exc()
         print("--> TEST " + str(self.__total_tests) + " " + test_name + " [FAILED]")

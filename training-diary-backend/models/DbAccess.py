@@ -12,22 +12,26 @@ class DbAccess:
     def close_connection(self):
         self.__connection.close()
 
-    def get_data(self, sql_script):
+    def get_data(self, query):
         cursor = self.__connection.cursor()
-        cursor.executescript(sql_script)
+        cursor.execute(query)
+        self.__connection.commit()
         return cursor.fetchall()
 
-    def insert_data(self, sql_script):
+    def insert_data(self, query):
         cursor = self.__connection.cursor()
-        cursor.executescript(sql_script)
+        cursor.execute(query)
+        self.__connection.commit()
 
-    def update_data(self, sql_script):
+    def update_data(self, query):
         cursor = self.__connection.cursor()
-        cursor.executescript(sql_script)
+        cursor.execute(query)
+        self.__connection.commit()
 
-    def delete_data(self, sql_script):
+    def delete_data(self, query):
         cursor = self.__connection.cursor()
-        cursor.executescript(sql_script)
+        cursor.execute(query)
+        self.__connection.commit()
 
     # Static method for initializing multiple databases.
     # @param path_to_db_files - path to where the db files are located
