@@ -40,7 +40,6 @@ Technologies Used:
 - Python
 - Flask
 - Gunicorn
-- Sqlite3 (development)
 - PostgreSQL (production)
 - Heroku (deployment)
 
