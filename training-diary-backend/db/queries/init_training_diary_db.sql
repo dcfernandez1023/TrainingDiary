@@ -12,7 +12,7 @@ CREATE TABLE Users (
 
 CREATE TABLE Activities (
     user_id text,
-    workout_id,
+    workout_id text,
     date text
 );
 
@@ -37,7 +37,7 @@ CREATE TABLE Exercises (
 );
 
 CREATE TABLE Body (
-    user_id integer,
+    user_id text,
     date text,
     body_weight integer,
     units text,
@@ -46,25 +46,25 @@ CREATE TABLE Body (
 
 /* Load sample data */
 INSERT INTO Users
-VALUES ('001', 'test1@gmail.com', 'test1'), ('002', 'test2@gmail.com', 'test2'), ('003', 'test3@gmail.com', 'test3');
+VALUES ('u001', 'test1@gmail.com', 'test1'), ('u002', 'test2@gmail.com', 'test2'), ('u003', 'test3@gmail.com', 'test3');
 
 INSERT INTO Activities
-VALUES ('001', 'w1', '4/11/21'), ('001', 'w3', '4/10/21'), ('002', 'w2', '4/7/21'), ('001', 'w1', '4/6/21');
+VALUES ('u001', 'w1', '4/11/21'), ('u001', 'w3', '4/10/21'), ('u002', 'w2', '4/7/21'), ('u001', 'w1', '4/6/21');
 
 INSERT INTO Workouts
 VALUES
-    ('w1', '001', 'Chest & Arms', '4/1/21', 0, 'Massive chest and arms workout'),
-    ('w2', '002', 'Back and Abs', '4/2/21', 0, 'Massive back and abs workout'),
-    ('w3', '001', 'Long Distance Run', '4/3/21', 0, 'Long run');
+    ('w1', 'u001', 'Chest & Arms', '4/1/21', 1, 'Massive chest and arms workout'),
+    ('w2', 'u002', 'Back and Abs', '4/2/21', 0, 'Massive back and abs workout'),
+    ('w3', 'u001', 'Long Distance Run', '4/3/21', 1, 'Long run');
 
 INSERT INTO Exercises
 VALUES
-    ('w1', '001', 'Bench-press', 'Weight-lifting', 4, 8, 225, 'lbs'),
-    ('w1', '001', 'Incline-press', 'Weight-lifting', 4, 8, 185, 'lbs'),
-    ('w1', '001', 'Db flies', 'Weight-lifting', 3, 12, 30, 'lbs');
+    ('w1', 'u001', 'Bench-press', 'Weight-lifting', 4, 8, 225, 'lbs'),
+    ('w1', 'u001', 'Incline-press', 'Weight-lifting', 4, 8, 185, 'lbs'),
+    ('w1', 'u001', 'Db flies', 'Weight-lifting', 3, 12, 30, 'lbs');
 
 INSERT INTO Body
 VALUES
-    ('001', '4/11/21', 176, 'lbs', 15),
-    ('001', '4/23/21', 173, 'lbs', 14.6)
+    ('u001', '4/11/21', 176, 'lbs', 15),
+    ('u001', '4/23/21', 173, 'lbs', 14.6)
 
