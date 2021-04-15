@@ -32,7 +32,7 @@ class QueryBuilder:
                 query += tables[i] + ", "
         # build where clause
         query += self.__construct_where_clause(conditions)
-        return query + ";"
+        return query
 
     # builds a simple insert query; does not support inserting into specific columns; must
     # provide data for all columns of the table's schema
@@ -62,7 +62,7 @@ class QueryBuilder:
                 query += ")"
             else:
                 query += "), "
-        return query + ";"
+        return query
 
     def build_update_query(self, table, cols_and_values, conditions):
         # build UPDATE clause
@@ -108,24 +108,24 @@ class QueryBuilder:
                 raise Exception("InvalidWhereClause: " + self.__wrap_in_single_quotes(str(condition)) +  " Needs 2 operands and 1 operator " )
             if i == conditions_len - 1:
                 if c0.isdigit():
-                    query += c0 + " " + c1
+                    query += c0 + " " + c1 + " "
                 else:
-                    query += c0 + " " + c1
+                    query += c0 + " " + c1 + " "
                 if c2.isdigit():
                     query += c2
                 else:
                     query += self.__wrap_in_single_quotes(c2)
             else:
-                if str(c0).isdigit():
-                    query += c0 + " " + c1
+                if c0.isdigit():
+                    query += c0 + " " + c1 + " "
                 else:
-                    query += self.__wrap_in_single_quotes(c0) + " " + c1
+                    query += c0 + " " + c1 + " "
                 if c2.isdigit():
                     query += c2
                 else:
                     query += self.__wrap_in_single_quotes(c2)
                 query += " AND "
-        return query + ";"
+        return query
 
     def __wrap_in_single_quotes(self, string):
         return "'" + string + "'"

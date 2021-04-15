@@ -1,4 +1,4 @@
-# Simple unit tests for User class
+# Simple unit tests for Workout class
 
 from tests import TestAssertion
 from models import Workout
@@ -79,8 +79,8 @@ except Exception:
 try:
     workout = Workout.Workout()
     print(str(workout.get_user_workouts_with_exercises("u001")))
-    test.assert_test_success("Workouts with Exercises")
+    test.assert_test_success("User Workouts with Exercises")
 except Exception:
-    test.assert_test_failure("Workouts with Exercises")
+    test.assert_test_failure("User Workouts with Exercises")
 
 test.assert_final_results()

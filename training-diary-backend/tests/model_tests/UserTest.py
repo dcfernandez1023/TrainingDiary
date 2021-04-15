@@ -1,6 +1,5 @@
 # Simple unit tests for User class
 
-import os
 from tests import TestAssertion
 from models import User
 

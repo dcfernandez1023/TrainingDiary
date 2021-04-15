@@ -1,3 +1,5 @@
+# NOTE: THIS CLASS WILL NOT BE USED FOR NOW. DUE TO DESIGN CHANGES, WORKOUTS WILL NO LONGER BE USED AS CONTAINERS
+# FOR EXERCISES.
 # Workout model object. Contains methods for CRUD operations on user's workout data and the exercise objects
 # associated with the user's workout
 
@@ -40,6 +42,7 @@ class Workout:
         return util.to_jsons(self.SCHEMA, data)
 
     def create_new_workout(self, user_id, name, date_created, is_public, description):
+        # TODO: make this id generation more unique
         workout_id = "workout_" + user_id + str(time.time())
         db = DbAccess.DbAccess()
         query = self.__query_builder.build_insert_query(self.TABLE, [
@@ -84,8 +87,8 @@ class Workout:
             workout = workout_dict.get(workout_id)
             exercises_with_workout = []
             for exercise in exercises:
-                if exercise[0] == workout_id:
-                    exercise_dict = dict(zip(Exercise.Exercise.schema, exercise))
+                if exercise[1] == workout_id:
+                    exercise_dict = dict(zip(Exercise.Exercise.SCHEMA, exercise))
                     exercises_with_workout.append(exercise_dict)
             workout.update({"exercises": exercises_with_workout})
             workouts_with_exercises.append(workout)

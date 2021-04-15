@@ -13,7 +13,6 @@ The main directories and files of this application:
     training-diary-backend/
          blueprints
          controllers
-         db
          models
          tests
          app.py
@@ -40,7 +39,7 @@ Technologies Used:
 - Python
 - Flask
 - Gunicorn
-- PostgreSQL (production)
+- PostgreSQL
 - Heroku (deployment)
 
 `training-diary-backend` contains all the files for the python backend to operate. The `blueprints` directory contains the endpoints that the Flask app will expose as well as the logic behind each endpoint.

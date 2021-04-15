@@ -55,7 +55,6 @@ try:
     #print("    " + "User u001's activities: " + str(activities))
     workouts = db.get_data("SELECT * FROM Workouts WHERE user_id = 'u001'")
     #print("    " + "User u001's workouts: " + str(workouts))
-    exercises = db.get_data("SELECT * FROM Exercises WHERE workout_id = 'w1'")
     #print("    " + "Workout w1's exercises: " + str(exercises))
     body = db.get_data("SELECT * FROM Body WHERE user_id = 'u001'")
     #print("    " + "User u001's body entries: " + str(body))
