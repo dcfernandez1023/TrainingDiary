@@ -12,7 +12,7 @@ CREATE TABLE Users (
 );
 
 CREATE TABLE Activities (
-    activity_id text,
+    activity_id text PRIMARY KEY,
     user_id text,
     exercise_id text,
     timestamp bigint,
@@ -56,8 +56,12 @@ CREATE TABLE Exercises (
 );
 
 CREATE TABLE Body (
+    body_id text PRIMARY KEY,
     user_id text,
-    date text,
+    timestamp bigint,
+    day integer,
+    month integer,
+    year integer,
     body_weight integer,
     units text,
     body_fat integer
@@ -98,6 +102,7 @@ VALUES
 
 INSERT INTO Body
 VALUES
-    ('u001', '4/11/21', 176, 'lbs', 15),
-    ('u001', '4/23/21', 173, 'lbs', 14.6)
+    ('b001', 'u001', 1618529709557, 15, 4, 2021, 176, 'lbs', 15),
+    ('b002', 'u001', 1618529709557, 15, 4, 2021, 177, 'lbs', 14.3),
+    ('b003', 'u001', 1618529709557, 15, 4, 2021, 178, 'lbs', 14.6);
 

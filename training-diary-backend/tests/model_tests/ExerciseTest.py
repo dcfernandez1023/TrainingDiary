@@ -40,7 +40,7 @@ except Exception:
 # Test 4: create new exercise
 try:
     exercise = Exercise.Exercise()
-    exercise.create_new_exercise('u001', 'Push-ups', 'Body-Weight', 4, 50, 0, 'lbs')
+    exercise.create_new_exercise('e007', 'u001', 'Push-ups', 'Body-Weight', 4, 50, 0, 'lbs')
     test.assert_test_success("Create New Exercise")
 except Exception:
     test.assert_test_failure("Create New Exercise")
@@ -50,7 +50,6 @@ try:
     exercise = Exercise.Exercise()
     exercise.create_new_exercises(
         [
-            ['e007', 'u001', 'Test1', 'Body-Weight', 4, 50, 0, 'lbs'],
             ['e008', 'u001', 'Test2', 'Body-Weight', 4, 50, 0, 'lbs'],
             ['e009', 'u001', 'Test3', 'Body-Weight', 4, 50, 0, 'lbs'],
             ['e010', 'u001', 'Test4', 'Body-Weight', 4, 50, 0, 'lbs']

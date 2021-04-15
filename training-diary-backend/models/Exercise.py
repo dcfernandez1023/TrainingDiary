@@ -31,9 +31,7 @@ class Exercise:
         db.close_connection()
         return util.to_json(self.SCHEMA, data[0])
 
-    def create_new_exercise(self, user_id, name, category, sets, reps, amount, units):
-        # TODO: generate id in controller
-        exercise_id = "exercise_" + user_id + str(time.time())
+    def create_new_exercise(self, exercise_id, user_id, name, category, sets, reps, amount, units):
         db = DbAccess.DbAccess()
         query = self.__query_builder.build_insert_query(self.TABLE, [
             (exercise_id, user_id, name, category, sets, reps, amount, units)])
@@ -58,7 +56,9 @@ class Exercise:
 
     def delete_exercise(self, exercise_id):
         db = DbAccess.DbAccess()
-        query = self.__query_builder.build_delete_query(self.TABLE, {"exercise_id": ["exercise_id", "=", exercise_id]})
-        db.delete_data(query)
+        delete_exercise_query = self.__query_builder.build_delete_query(self.TABLE, {"exercise_id": ["exercise_id", "=", exercise_id]})
+        delete_activity_query = self.__query_builder.build_delete_query("Activities", {"exercise_id": ["exercise_id", "=", exercise_id]})
+        db.delete_data(delete_exercise_query)
+        db.delete_data(delete_activity_query)
         db.close_connection()
 

@@ -2,7 +2,7 @@
 
 
 class QueryBuilder:
-    # builds a simple SELECT FROM WHERE query
+    # builds a simple SELECT FROM WHERE (AND) query
     # @param tables - list of tables to select from
     # @param columns - list of columns to select from
     # @param conditions - dictionary of conditions to apply in the WHERE clause
