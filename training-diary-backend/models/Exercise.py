@@ -5,6 +5,11 @@ from models import DbAccess, QueryBuilder
 
 
 class Exercise:
+    schema = ("workout_id", "user_id", "name", "category", "sets", "reps", "amount", "units")
+
+    def __init__(self):
+        self.__query_builder = QueryBuilder.QueryBuilder()
+
     def get_exercises_by_user_id(self, user_id):
         db = DbAccess.DbAccess()
         query = "SELECT * " \

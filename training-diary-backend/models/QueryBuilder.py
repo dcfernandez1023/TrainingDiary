@@ -101,26 +101,29 @@ class QueryBuilder:
         for i in range(conditions_len):
             key = condition_keys[i]
             condition = conditions[key]
+            c0 = str(condition[0])
+            c1 = str(condition[1])
+            c2 = str(condition[2])
             if len(condition) != 3:
                 raise Exception("InvalidWhereClause: " + self.__wrap_in_single_quotes(str(condition)) +  " Needs 2 operands and 1 operator " )
             if i == conditions_len - 1:
-                if str(condition[0]).isdigit():
-                    query += condition[0] + " " + condition[1]
+                if c0.isdigit():
+                    query += c0 + " " + c1
                 else:
-                    query += condition[0] + " " + condition[1]
-                if str(condition[2]).isdigit():
-                    query += condition[2]
+                    query += c0 + " " + c1
+                if c2.isdigit():
+                    query += c2
                 else:
-                    query += self.__wrap_in_single_quotes(condition[2])
+                    query += self.__wrap_in_single_quotes(c2)
             else:
-                if str(condition[0]).isdigit():
-                    query += condition[0] + " " + condition[1]
+                if str(c0).isdigit():
+                    query += c0 + " " + c1
                 else:
-                    query += self.__wrap_in_single_quotes(condition[0]) + " " + condition[1]
-                if str(condition[2]).isdigit():
-                    query += condition[2]
+                    query += self.__wrap_in_single_quotes(c0) + " " + c1
+                if c2.isdigit():
+                    query += c2
                 else:
-                    query += self.__wrap_in_single_quotes(condition[2])
+                    query += self.__wrap_in_single_quotes(c2)
                 query += " AND "
         return query + ";"
 

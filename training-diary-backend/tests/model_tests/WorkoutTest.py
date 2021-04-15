@@ -1,6 +1,5 @@
 # Simple unit tests for User class
 
-import os
 from tests import TestAssertion
 from models import Workout
 
@@ -67,5 +66,21 @@ try:
     test.assert_test_success("Delete Workout")
 except Exception:
     test.assert_test_failure("Delete Workout")
+
+# Test 7: get public workouts
+try:
+    workout = Workout.Workout()
+    print(str(workout.get_public_workouts()))
+    test.assert_test_success("Get Public Workouts")
+except Exception:
+    test.assert_test_failure("Get Public Workouts")
+
+# Test 8: get user's workouts along with exercises associated with each workout
+try:
+    workout = Workout.Workout()
+    print(str(workout.get_user_workouts_with_exercises("u001")))
+    test.assert_test_success("Workouts with Exercises")
+except Exception:
+    test.assert_test_failure("Workouts with Exercises")
 
 test.assert_final_results()

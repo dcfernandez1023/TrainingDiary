@@ -20,7 +20,7 @@ try:
     info = user.get_user_info("u001")
     if info is None:
         raise Exception("No User Data Returned")
-    #print(str(info))
+    print(str(info))
     test.assert_test_success("Get User Info")
 except Exception:
     test.assert_test_failure("Get User Info")
@@ -40,7 +40,7 @@ try:
     user = User.User()
     new_data = {"email": "dom22c@gmail.com", "name": "Dominic Fernandez"}
     user.update_user_info("u008", new_data)
-    #print("Update: " + str(user.get_user_info("u008")))
+    print("Update: " + str(user.get_user_info("u008")))
     test.assert_test_success("Update User")
 except Exception:
     test.assert_test_failure("Update User")
