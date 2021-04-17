@@ -34,7 +34,7 @@ try:
 except Exception:
     test.assert_test_failure("Get Body Weight Entry by Id")
 
-# Test 3: get body fat entry by id
+# Test 4: get body fat entry by id
 try:
     body = Body.Body()
     info = body.get_body_fat_entry_by_id('bf001')
@@ -45,7 +45,7 @@ try:
 except Exception:
     test.assert_test_failure("Get Body Fat Entry by Id")
 
-# Test 4: create body weight entry
+# Test 5: create body weight entry
 try:
     body = Body.Body()
     body.create_new_body_weight_entry('bw003', 'u001', 420, 'lbs', 1618637490472, 16, 4, 2021, 'yoo')
@@ -57,7 +57,7 @@ try:
 except Exception:
     test.assert_test_failure("Create New Body Weight Entry")
 
-# Test 4: create body fat entry
+# Test 6: create body fat entry
 try:
     body = Body.Body()
     body.create_new_body_fat_entry('bf003', 'u001', 420, 1618637490472, 16, 4, 2021, 'CREATE NEW')
@@ -69,7 +69,7 @@ try:
 except Exception:
     test.assert_test_failure("Create New Body Fat Entry")
 
-# Test 4: update body weight entry
+# Test 7: update body weight entry
 try:
     body = Body.Body()
     new_data = {"timestamp": 420, "weight": 165, "units": "kgs", "notes": "UPDATED BW YO"}
@@ -79,7 +79,7 @@ try:
 except Exception:
     test.assert_test_failure("Update Body Weight Entry")
 
-# Test 4: update body fat entry
+# Test 8: update body fat entry
 try:
     body = Body.Body()
     new_data = {"timestamp": 420, "percentage": 10, "notes": "UPDATED BF YO"}
@@ -89,7 +89,7 @@ try:
 except Exception:
     test.assert_test_failure("Update Body Fat Entry")
 
-# Test 5: delete body weight entry
+# Test 9: delete body weight entry
 try:
     body = Body.Body()
     body.delete_body_weight_entry('bw003')
@@ -97,7 +97,7 @@ try:
 except Exception:
     test.assert_test_failure("Delete Body Entry")
 
-# Test 5: delete body entry
+# Test 10: delete body entry
 try:
     body = Body.Body()
     body.delete_body_fat_entry('bf003')

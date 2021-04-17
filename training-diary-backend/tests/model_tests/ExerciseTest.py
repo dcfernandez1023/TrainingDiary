@@ -62,7 +62,7 @@ try:
 except Exception:
     test.assert_test_failure("Create New Exercises")
 
-# Test : Create new exercise entries
+# Test 6: Create new exercise entries
 try:
     exercise = Exercise.Exercise()
     exercise.create_new_exercise_entries(
@@ -77,7 +77,7 @@ except Exception:
     test.assert_test_failure("Create New Exercises Entries")
 
 
-# Test 6: update exercise
+# Test 7: update exercise
 try:
     exercise = Exercise.Exercise()
     new_data = {"name": "UPDATED EXERCISE", "category": "UPDATED CATEGORY", "sets": 420}
@@ -87,7 +87,7 @@ try:
 except Exception:
     test.assert_test_failure("Update Exercise")
 
-# Test: update exercise entry
+# Test 8: update exercise entry
 try:
     exercise = Exercise.Exercise()
     new_data = {
@@ -106,7 +106,7 @@ try:
 except Exception:
     test.assert_test_failure("Update Exercise")
 
-# Test: delete exercise entry
+# Test 9: delete exercise entry
 try:
     exercise = Exercise.Exercise()
     exercise.delete_exercise_entry_by_id('ee005')
@@ -114,7 +114,7 @@ try:
 except Exception:
     test.assert_test_failure("Delete Exercise Entry")
 
-# Test 7: delete exercise
+# Test 10: delete exercise
 try:
     exercise = Exercise.Exercise()
     exercise.delete_exercise('e007')
