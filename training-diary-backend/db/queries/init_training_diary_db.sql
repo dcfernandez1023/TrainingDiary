@@ -1,48 +1,17 @@
 DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS Activities;
-DROP TABLE IF EXISTS Journals;
-/* DROP TABLE IF EXISTS Workouts; */
 DROP TABLE IF EXISTS Exercises;
-DROP TABLE IF EXISTS Body;
+DROP TABLE IF EXISTS ExerciseEntries;
+DROP TABLE IF EXISTS BodyWeight;
+DROP TABLE IF EXISTS BodyFat;
+DROP TABLE IF EXISTS Diet;
+DROP TABLE IF EXISTS CustomTypes;
+DROP TABLE IF EXISTS CustomEntries;
 
 CREATE TABLE Users (
     user_id text PRIMARY KEY,
     email text,
     name text
 );
-
-CREATE TABLE Activities (
-    activity_id text PRIMARY KEY,
-    user_id text,
-    exercise_id text,
-    timestamp bigint,
-    day integer,
-    month integer,
-    year integer,
-    notes text
-);
-
-/*
-CREATE TABLE Journals (
-    user_id text,
-    timestamp bigint,
-    day integer,
-    month integer,
-    year integer,
-    notes text
-);
-*/
-
-/*
-CREATE TABLE Workouts (
-    workout_id text PRIMARY KEY,
-    user_id text,
-    name text,
-    date_created text,
-    is_public integer,
-    description text
-);
-*/
 
 CREATE TABLE Exercises (
     exercise_id text PRIMARY KEY,
@@ -55,43 +24,70 @@ CREATE TABLE Exercises (
     units text
 );
 
-CREATE TABLE Body (
-    body_id text PRIMARY KEY,
+CREATE TABLE ExerciseEntries (
+    exercise_entry_id text PRIMARY KEY,
+    exercise_id text,
     user_id text,
     timestamp bigint,
     day integer,
     month integer,
     year integer,
-    body_weight integer,
-    units text,
-    body_fat integer
+    notes text
 );
+
+CREATE TABLE BodyWeight (
+    bw_id text PRIMARY KEY,
+    user_id text,
+    weight integer,
+    units text,
+    timestamp bigint,
+    day integer,
+    month integer,
+    year integer,
+    notes text
+);
+
+CREATE TABLE BodyFat (
+    bf_id text PRIMARY KEY,
+    user_id text,
+    percentage integer,
+    timestamp bigint,
+    day integer,
+    month integer,
+    year integer,
+    notes text
+);
+
+CREATE TABLE Diet (
+    user_id text,
+    day integer,
+    month integer,
+    year integer,
+    calories integer,
+    protein integer,
+    carbs integer,
+    fat integer,
+    notes text,
+    PRIMARY KEY(user_id, day, month, year)
+);
+
+CREATE TABLE CustomTypes (
+    custom_id text PRIMARY KEY,
+    user_id text,
+    custom_schema json
+);
+
+CREATE TABLE CustomEntries (
+    custom_id text,
+    user_id text,
+    custom_entry json,
+    notes text
+);
+
 
 /* Load sample data */
 INSERT INTO Users
 VALUES ('u001', 'test1@gmail.com', 'test1'), ('u002', 'test2@gmail.com', 'test2'), ('u003', 'test3@gmail.com', 'test3');
-
-INSERT INTO Activities
-VALUES
-    ('a001', 'u001', 'e001', 1618510614562, 15, 4, 2021, 'test notes 1'),
-    ('a003', 'u001', 'e002', 1618510614562, 15, 4, 2021, 'test notes 2'),
-    ('a004', 'u002', 'e004', 1604390400000, 3, 10, 2020, 'test notes 3'),
-    ('a005', 'u001', 'e003', 1594191600000, 8, 6, 2020, 'test notes 4');
-
-/*
-INSERT INTO Journals
-VALUES
-    ('u001', 1618510614562, 15, 4, 2021, 'test1'),
-    ('u001', 15941916000008, 8, 6, 2020, 'test2');
-*/
-
-/*
-INSERT INTO Workouts
-VALUES
-    ('w1', 'u001', 'Chest & Arms', '4/01/21', 1, 'Massive chest and arms workout'),
-    ('w2', 'u002', 'Back and Abs', '4/02/21', 0, 'Massive back and abs workout'),
-    ('w3', 'u001', 'Long Distance Run', '4/03/21', 1, 'Long run');
-*/
 
 INSERT INTO Exercises
 VALUES
@@ -100,9 +96,32 @@ VALUES
     ('e003', 'u001', 'Db flies', 'Weight-lifting', 3, 12, 30, 'lbs'),
     ('e004', 'u002', 'Long Distance Run', 'Cardio', 0, 0, 12, 'miles');
 
-INSERT INTO Body
+INSERT INTO ExerciseEntries
 VALUES
-    ('b001', 'u001', 1618529709557, 15, 4, 2021, 176, 'lbs', 15),
-    ('b002', 'u001', 1618529709557, 15, 4, 2021, 177, 'lbs', 14.3),
-    ('b003', 'u001', 1618529709557, 15, 4, 2021, 178, 'lbs', 14.6);
+    ('ee001', 'e001', 'u001', 1618637490472, 16, 4, 2021, 'test1'),
+    ('ee002', 'e002', 'u001', 1447920000000, 19, 10, 2015, 'test2'),
+    ('ee003', 'e003', 'u001', 1618637490472, 16, 4, 2021, 'test3'),
+    ('ee004', 'e004', 'u002', 1618637490472, 16, 4, 2021, 'test4');
 
+INSERT INTO BodyWeight
+VALUES
+    ('bw001', 'u001', 177, 'lbs', 1618637490472, 16, 4, 2021, 'yoo'),
+    ('bw002', 'u001', 176, 'lbs', 1649055600000, 15, 4, 2021, 'dawg');
+
+INSERT INTO BodyFat
+VALUES
+    ('bf001', 'u001', 15, 1618637490472, 16, 4, 2021, 'gotta get this lower'),
+    ('bf002', 'u001', 14.8, 1649055600000, 15, 4, 2021, 'testseteststs');
+
+INSERT INTO Diet
+VALUES
+    ('u001', 16, 4, 2021, 2700, 180, 230, 82, 'hit goals today'),
+    ('u001', 15, 4, 2021, 2700, 178, 214, 85, 'hit goals today again');
+
+INSERT INTO CustomTypes
+VALUES
+    ('c001', 'u001', '{"name": "Sleep", "hours": 0}');
+
+INSERT INTO CustomEntries
+VALUES
+    ('c001', 'u001', '{"name": "Sleep", "hours": 7}', 'testing custom entries');

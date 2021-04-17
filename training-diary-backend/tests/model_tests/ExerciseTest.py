@@ -2,6 +2,7 @@
 
 from tests import TestAssertion
 from models import Exercise
+from pprint import pprint
 
 
 test = TestAssertion.TestAssertion()
@@ -21,12 +22,14 @@ try:
     info = exercise.get_user_exercises("u001")
     if info is None:
         raise Exception("No Workout Data Returned")
-    print(str(info))
-    test.assert_test_success("Get User Exercises")
+    pprint("User Exercises: " + str(info))
+    pprint("User Exercise Entries: " + str(exercise.get_user_exercise_entries("u001")))
+    pprint("User Exercise Entries by Year (2021): " + str(exercise.get_user_exercise_entries_by_year('u001', 2021)))
+    test.assert_test_success("Get User Exercises and Entries")
 except Exception:
-    test.assert_test_failure("Get User Exercises")
+    test.assert_test_failure("Get User Exercises and Entries")
 
-# Test 3: get workout by id
+# Test 3: get exercise by id
 try:
     exercise = Exercise.Exercise()
     info = exercise.get_exercise_by_id("e001")
@@ -59,6 +62,21 @@ try:
 except Exception:
     test.assert_test_failure("Create New Exercises")
 
+# Test : Create new exercise entries
+try:
+    exercise = Exercise.Exercise()
+    exercise.create_new_exercise_entries(
+        [
+            ('ee005', 'e008', 'u001', 1618637490472, 16, 4, 2021, 'new entry1'),
+            ('ee006', 'e009', 'u001', 1447920000000, 19, 10, 2015, 'new entry2'),
+            ('ee007', 'e010', 'u001', 1618637490472, 16, 4, 2021, 'new entry3'),
+        ]
+    )
+    test.assert_test_success("Create New Exercises Entries")
+except Exception:
+    test.assert_test_failure("Create New Exercises Entries")
+
+
 # Test 6: update exercise
 try:
     exercise = Exercise.Exercise()
@@ -68,6 +86,33 @@ try:
     test.assert_test_success("Update Exercise")
 except Exception:
     test.assert_test_failure("Update Exercise")
+
+# Test: update exercise entry
+try:
+    exercise = Exercise.Exercise()
+    new_data = {
+        "exercise_entry_id": "ee005",
+        "exercise_id": "e001",
+        "user_id": "u001",
+        "timestamp": 1618637490472,
+        "day": 16,
+        "month": 4,
+        "year": 2021,
+        "notes": "UPDATED NOTES OF THIS ENTRY YOOOO"
+    }
+    exercise.update_exercise_entry('ee005', new_data)
+    print(str(exercise.get_exercise_entry_by_id('ee005')))
+    test.assert_test_success("Update Exercise")
+except Exception:
+    test.assert_test_failure("Update Exercise")
+
+# Test: delete exercise entry
+try:
+    exercise = Exercise.Exercise()
+    exercise.delete_exercise_entry_by_id('ee005')
+    test.assert_test_success("Delete Exercise Entry")
+except Exception:
+    test.assert_test_failure("Delete Exercise Entry")
 
 # Test 7: delete exercise
 try:

@@ -38,6 +38,7 @@ Technologies Used:
 Technologies Used:
 - Python
 - Flask
+- JWT (token-based authentication for endpoints)
 - Gunicorn
 - PostgreSQL
 - Heroku (deployment)
