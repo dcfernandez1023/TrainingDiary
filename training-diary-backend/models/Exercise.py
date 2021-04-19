@@ -32,18 +32,14 @@ class Exercise:
         db.close_connection()
         return util.to_json(self.EXERCISE_SCHEMA, data[0])
 
-    def get_exercise_entry_by_id(self, exercise_entry_id):
+    def get_exercise_entries_by_exercise_id(self, exercise_id):
         db = DbAccess.DbAccess()
         query = self.__query_builder.build_select_query([self.EXERCISE_ENTRY_TABLE], [],
-                                                        {"exercise_entry_id":
-                                                             ["exercise_entry_id", "=", exercise_entry_id]})
+                                                        {"exercise_id":
+                                                             ["exercise_id", "=", exercise_id]})
         data = db.get_data(query)
-        if len(data) > 1:
-            raise Exception("DuplicateExerciseEntryIds")
-        if len(data) == 0:
-            return None
         db.close_connection()
-        return util.to_json(self.EXERCISE_ENTRY_SCHEMA, data[0])
+        return util.to_jsons(self.EXERCISE_ENTRY_SCHEMA, data)
 
     def get_user_exercise_entries(self, user_id):
         db = DbAccess.DbAccess()

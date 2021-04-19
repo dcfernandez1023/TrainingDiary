@@ -78,9 +78,14 @@ CREATE TABLE CustomTypes (
 );
 
 CREATE TABLE CustomEntries (
+    custom_entry_id text PRIMARY KEY,
     custom_id text,
     user_id text,
     custom_entry json,
+    timestamp bigint,
+    day integer,
+    month integer,
+    year integer,
     notes text
 );
 
@@ -124,4 +129,4 @@ VALUES
 
 INSERT INTO CustomEntries
 VALUES
-    ('c001', 'u001', '{"name": "Sleep", "hours": 7}', 'testing custom entries');
+    ('ce001', 'c001', 'u001', '{"name": "Sleep", "hours": 7}', 1618637490472, 16, 4, 2021, 'testing custom entries');

@@ -92,7 +92,7 @@ try:
     exercise = Exercise.Exercise()
     new_data = {
         "exercise_entry_id": "ee005",
-        "exercise_id": "e001",
+        "exercise_id": "e008",
         "user_id": "u001",
         "timestamp": 1618637490472,
         "day": 16,
@@ -101,8 +101,8 @@ try:
         "notes": "UPDATED NOTES OF THIS ENTRY YOOOO"
     }
     exercise.update_exercise_entry('ee005', new_data)
-    print(str(exercise.get_exercise_entry_by_id('ee005')))
-    test.assert_test_success("Update Exercise")
+    print(str(exercise.get_exercise_entries_by_exercise_id('e001')))
+    test.assert_test_success("Update Exercise Entry")
 except Exception:
     test.assert_test_failure("Update Exercise")
 
