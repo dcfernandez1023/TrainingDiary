@@ -1,23 +1,24 @@
 # Simple unit tests for Custom class
 
 from tests import TestAssertion
-from models import Custom
+from models import Custom, DbAccess
 from pprint import pprint
 
+db = DbAccess.DbAccess()    
 test = TestAssertion.TestAssertion()
 test.print_test_name("Custom Object Tests")
 
 
 # Test 1: instantiation
 try:
-    custom = Custom.Custom()
+    custom = Custom.Custom(db)
     test.assert_test_success("Instantiation")
 except Exception:
     test.assert_test_failure("Instantiation")
 
 # Test 2: get custom types and entries
 try:
-    custom = Custom.Custom()
+    custom = Custom.Custom(db)
     pprint("User Custom Types: " + str(custom.get_user_custom_types('u001')))
     pprint("User Custom Entries: " + str(custom.get_user_custom_entries('u001')))
     pprint("Custom Type by Id: " + str(custom.get_custom_type_by_id('c001')))
@@ -29,7 +30,7 @@ except Exception:
 
 # Test 3: create new custom type
 try:
-    custom = Custom.Custom()
+    custom = Custom.Custom(db)
     custom.create_new_custom_type('c002', 'u001', {"test": "test"})
     test.assert_test_success("Create New Custom Type")
 except Exception:
@@ -37,7 +38,7 @@ except Exception:
 
 # Test 4: create new custom entry
 try:
-    custom = Custom.Custom()
+    custom = Custom.Custom(db)
     custom.create_new_custom_entry("ce002", "c002", "u001", {"test": "test"}, 23465463546654, 16, 4, 2021, "test create custom entry")
     test.assert_test_success("Create New Custom Entry")
 except Exception:
@@ -45,7 +46,7 @@ except Exception:
 
 # Test 5: update custom type
 try:
-    custom = Custom.Custom()
+    custom = Custom.Custom(db)
     pprint("Before update: " + str(custom.get_custom_type_by_id('c002')))
     custom.update_custom_type('c002', {"custom_schema": {"test": "test"}})
     pprint("After update: " + str(custom.get_custom_type_by_id('c002')))
@@ -56,7 +57,7 @@ except Exception:
 
 # Test: 6 update custom entry
 try:
-    custom = Custom.Custom()
+    custom = Custom.Custom(db)
     pprint("Before update: " + str(custom.get_custom_entry_by_id('ce002')))
     custom.update_custom_entry('ce002', 'c002', {"custom_entry": {"test": "123"}, "notes": "UPDATED NOTESSSS"})
     pprint("After update: " + str(custom.get_custom_entry_by_id('ce002')))
@@ -66,10 +67,11 @@ except Exception:
 
 # Test: 7 delete custom type and custom entry
 try:
-    custom = Custom.Custom()
+    custom = Custom.Custom(db)
     custom.delete_custom_type('c002')
     test.assert_test_success("Delete Custom Type & Custom Entry")
 except Exception:
     test.assert_test_failure("Delete Custom Type & Custom Entry")
 
 test.assert_final_results()
+db.close_connection()

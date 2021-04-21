@@ -1,24 +1,24 @@
 # Simple unit tests for Exercise class
 
 from tests import TestAssertion
-from models import Exercise
+from models import Exercise, DbAccess
 from pprint import pprint
 
-
+db = DbAccess.DbAccess()
 test = TestAssertion.TestAssertion()
 test.print_test_name("Exercise Object Tests")
 
 
 # Test 1: instantiation
 try:
-    exercise = Exercise.Exercise()
+    exercise = Exercise.Exercise(db)
     test.assert_test_success("Instantiation")
 except Exception:
     test.assert_test_failure("Instantiation")
 
 # Test 2: get user exercises
 try:
-    exercise = Exercise.Exercise()
+    exercise = Exercise.Exercise(db)
     info = exercise.get_user_exercises("u001")
     if info is None:
         raise Exception("No Workout Data Returned")
@@ -31,7 +31,7 @@ except Exception:
 
 # Test 3: get exercise by id
 try:
-    exercise = Exercise.Exercise()
+    exercise = Exercise.Exercise(db)
     info = exercise.get_exercise_by_id("e001")
     if info is None:
         raise Exception("No Exercise Data Returned")
@@ -42,7 +42,7 @@ except Exception:
 
 # Test 4: create new exercise
 try:
-    exercise = Exercise.Exercise()
+    exercise = Exercise.Exercise(db)
     exercise.create_new_exercise('e007', 'u001', 'Push-ups', 'Body-Weight', 4, 50, 0, 'lbs')
     test.assert_test_success("Create New Exercise")
 except Exception:
@@ -50,7 +50,7 @@ except Exception:
 
 # Test 5: create new exercises
 try:
-    exercise = Exercise.Exercise()
+    exercise = Exercise.Exercise(db)
     exercise.create_new_exercises(
         [
             ['e008', 'u001', 'Test2', 'Body-Weight', 4, 50, 0, 'lbs'],
@@ -64,7 +64,7 @@ except Exception:
 
 # Test 6: Create new exercise entries
 try:
-    exercise = Exercise.Exercise()
+    exercise = Exercise.Exercise(db)
     exercise.create_new_exercise_entries(
         [
             ('ee005', 'e008', 'u001', 1618637490472, 16, 4, 2021, 'new entry1'),
@@ -79,7 +79,7 @@ except Exception:
 
 # Test 7: update exercise
 try:
-    exercise = Exercise.Exercise()
+    exercise = Exercise.Exercise(db)
     new_data = {"name": "UPDATED EXERCISE", "category": "UPDATED CATEGORY", "sets": 420}
     exercise.update_exercise('e007', new_data)
     print(str(exercise.get_exercise_by_id('e007')))
@@ -89,7 +89,7 @@ except Exception:
 
 # Test 8: update exercise entry
 try:
-    exercise = Exercise.Exercise()
+    exercise = Exercise.Exercise(db)
     new_data = {
         "exercise_entry_id": "ee005",
         "exercise_id": "e008",
@@ -108,7 +108,7 @@ except Exception:
 
 # Test 9: delete exercise entry
 try:
-    exercise = Exercise.Exercise()
+    exercise = Exercise.Exercise(db)
     exercise.delete_exercise_entry_by_id('ee005')
     test.assert_test_success("Delete Exercise Entry")
 except Exception:
@@ -116,7 +116,7 @@ except Exception:
 
 # Test 10: delete exercise
 try:
-    exercise = Exercise.Exercise()
+    exercise = Exercise.Exercise(db)
     exercise.delete_exercise('e007')
     exercise.delete_exercise('e008')
     exercise.delete_exercise('e009')
@@ -127,3 +127,4 @@ except Exception:
 
 
 test.assert_final_results()
+db.close_connection()

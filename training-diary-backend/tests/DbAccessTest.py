@@ -16,7 +16,7 @@ except Exception:
 
 # Test 2: init dbs
 try:
-    file = open("../../db/queries/init_training_diary_db.sql", "r")
+    file = open("../db/queries/init_training_diary_db.sql", "r")
     query = file.read()
     db = DbAccess.DbAccess()
     db.init_database(query)

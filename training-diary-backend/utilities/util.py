@@ -22,6 +22,7 @@ def tups_to_dict(tups, schema):
         res_dict.update({key: inner_dict})
     return res_dict
 
+
 # converts a tuple from the database in to a json/dictionary representation
 # the keys of the json/dictionary are from schema, and values are from the tuple
 # @param schema - provides keys for the json/dictionary
@@ -36,6 +37,10 @@ def to_json(schema, tuple):
         res.update({key: value})
     return res
 
+
+# Given a schema and a tuple of tuples/lists, this will convert each tuple into a dict/json representation
+# @param schema - provides keys for the json/dictionary
+# @param tuple - provides values for the json/dictionary
 def to_jsons(schema, tuples):
     res = []
     for i in range(len(tuples)):
