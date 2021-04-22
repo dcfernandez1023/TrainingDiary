@@ -31,6 +31,8 @@ class DbAccess:
         )
 
     def close_connection(self):
+        if self.__connection is None:
+            return
         self.__connection.close()
         self.__connection = None
 

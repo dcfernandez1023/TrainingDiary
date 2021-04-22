@@ -1,7 +1,8 @@
 # User model object. Contains methods for CRUD operations on user's data. This class gives access to the User table
 # in the database.
 
-from models import QueryBuilder, Body, Custom, Diet, Exercise
+from models import Body, Custom, Diet, Exercise
+from db import QueryBuilder
 from utilities import util
 
 

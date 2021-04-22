@@ -3,7 +3,7 @@
 # exercises, and the ExerciseEntries table contains all instances of when an exercise was logged by a user into
 # the application.
 
-from models import QueryBuilder
+from db import QueryBuilder
 from utilities import util
 
 

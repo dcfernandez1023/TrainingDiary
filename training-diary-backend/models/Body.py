@@ -1,6 +1,6 @@
 # Body model object. Contains methods for CRUD operations on user's body data
 
-from models import DbAccess, QueryBuilder
+from db import QueryBuilder
 from utilities import util
 
 

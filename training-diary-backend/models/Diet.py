@@ -1,7 +1,7 @@
 # Diet model object. Contains methods for CRUD operations on user's diet data. This class gives access to the
 # Diet table in the database.
 
-from models import DbAccess, QueryBuilder
+from db import QueryBuilder
 from utilities import util
 
 

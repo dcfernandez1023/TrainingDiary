@@ -1,6 +1,6 @@
 # Custom model object. Contains methods for CRUD operations on user-defined custom fitness data
 
-from models import DbAccess, QueryBuilder
+from db import QueryBuilder
 from utilities import util
 import json
 
@@ -20,15 +20,12 @@ class Custom:
         query = self.__query_builder.build_select_query([self.CUSTOM_TYPE_TABLE],
                                                         [], {"user_id": ["user_id", "=", user_id]})
         data = self.__db.get_data(query)
-
         return util.to_jsons(self.CUSTOM_TYPE_SCHEMA, data)
 
     def get_user_custom_entries(self, user_id):
-
         query = self.__query_builder.build_select_query([self.CUSTOM_ENTRY_TABLE],
                                                         [], {"user_id": ["user_id", "=", user_id]})
         data = self.__db.get_data(query)
-
         return util.to_jsons(self.CUSTOM_ENTRY_SCHEMA, data)
 
     def get_custom_type_by_id(self, custom_id):
@@ -39,14 +36,12 @@ class Custom:
             raise Exception("DuplicateCustomTypeIds")
         if len(data) == 0:
             return None
-
         return util.to_json(self.CUSTOM_TYPE_SCHEMA, data[0])
 
     def get_user_custom_entries_by_custom_id(self, custom_id):
         query = self.__query_builder.build_select_query([self.CUSTOM_ENTRY_TABLE],
                                                         [], {"custom_id": ["custom_id", "=", custom_id]})
         data = self.__db.get_data(query)
-
         return util.to_jsons(self.CUSTOM_ENTRY_SCHEMA, data)
 
     def get_custom_entry_by_id(self, custom_entry_id):
@@ -58,7 +53,6 @@ class Custom:
             raise Exception("DuplicateCustomEntryIds")
         if len(data) == 0:
             return None
-
         return util.to_json(self.CUSTOM_ENTRY_SCHEMA, data[0])
 
     def create_new_custom_type(self, custom_id, user_id, custom_schema):
