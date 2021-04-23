@@ -1,0 +1,146 @@
+----------START----------
+##2021-04-22 09:49:48
+Traceback (most recent call last):
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\controllers\DietController.py", line 29, in get_entries
+    return make_response(data, 200)
+  File "C:\Users\Dominic\AppData\Roaming\Python\Python37\site-packages\flask\helpers.py", line 223, in make_response
+    return current_app.make_response(args)
+  File "C:\Users\Dominic\AppData\Roaming\Python\Python37\site-packages\flask\app.py", line 2131, in make_response
+    " {rv.__class__.__name__}.".format(rv=rv)
+TypeError: The view function did not return a valid response. The return type must be a string, dict, tuple, Response instance, or WSGI callable, but it was a list.
+-----------END-----------
+
+----------START----------
+##2021-04-22 10:24:03
+Traceback (most recent call last):
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\controllers\DietController.py", line 50, in create_entry
+    self.__diet.create_new_diet_entry(user_id, day, month, year, calories, protein, carbs, fat, notes)
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\models\Diet.py", line 38, in create_new_diet_entry
+    self.__db.insert_data(query)
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\models\DbAccess.py", line 53, in insert_data
+    cursor.execute(query)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "diet_pkey"
+DETAIL:  Key (user_id, day, month, year)=(u001, 22, 4, 2021) already exists.
+-----------END-----------
+
+----------START----------
+##2021-04-22 10:24:18
+Traceback (most recent call last):
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\controllers\DietController.py", line 50, in create_entry
+    self.__diet.create_new_diet_entry(user_id, day, month, year, calories, protein, carbs, fat, notes)
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\models\Diet.py", line 38, in create_new_diet_entry
+    self.__db.insert_data(query)
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\models\DbAccess.py", line 53, in insert_data
+    cursor.execute(query)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "diet_pkey"
+DETAIL:  Key (user_id, day, month, year)=(u001, 22, 4, 2021) already exists.
+-----------END-----------
+
+----------START----------
+##2021-04-22 10:36:37
+Traceback (most recent call last):
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\controllers\DietController.py", line 50, in create_entry
+    self.__diet.create_new_diet_entry(user_id, day, month, year, calories, protein, carbs, fat, notes)
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\models\Diet.py", line 38, in create_new_diet_entry
+    self.__db.insert_data(query)
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\models\DbAccess.py", line 53, in insert_data
+    cursor.execute(query)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "diet_pkey"
+DETAIL:  Key (user_id, day, month, year)=(u001, 22, 4, 2021) already exists.
+-----------END-----------
+
+----------START----------
+##2021-04-22 10:36:55
+Traceback (most recent call last):
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\controllers\DietController.py", line 50, in create_entry
+    self.__diet.create_new_diet_entry(user_id, day, month, year, calories, protein, carbs, fat, notes)
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\models\Diet.py", line 38, in create_new_diet_entry
+    self.__db.insert_data(query)
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\models\DbAccess.py", line 53, in insert_data
+    cursor.execute(query)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "diet_pkey"
+DETAIL:  Key (user_id, day, month, year)=(u001, 22, 4, 2021) already exists.
+-----------END-----------
+
+----------START----------
+##2021-04-22 10:39:27
+Traceback (most recent call last):
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\controllers\DietController.py", line 50, in create_entry
+    self.__diet.create_new_diet_entry(user_id, day, month, year, calories, protein, carbs, fat, notes)
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\models\Diet.py", line 38, in create_new_diet_entry
+    self.__db.insert_data(query)
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\models\DbAccess.py", line 53, in insert_data
+    cursor.execute(query)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "diet_pkey"
+DETAIL:  Key (user_id, day, month, year)=(u001, 22, 4, 2021) already exists.
+-----------END-----------
+
+----------START----------
+##2021-04-22 13:59:20
+Traceback (most recent call last):
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\controllers\CustomController.py", line 17, in get_types
+    return make_response(data, 200)
+  File "C:\Users\Dominic\AppData\Roaming\Python\Python37\site-packages\flask\helpers.py", line 223, in make_response
+    return current_app.make_response(args)
+  File "C:\Users\Dominic\AppData\Roaming\Python\Python37\site-packages\flask\app.py", line 2131, in make_response
+    " {rv.__class__.__name__}.".format(rv=rv)
+TypeError: The view function did not return a valid response. The return type must be a string, dict, tuple, Response instance, or WSGI callable, but it was a list.
+-----------END-----------
+
+----------START----------
+##2021-04-22 13:59:20
+Traceback (most recent call last):
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\controllers\CustomController.py", line 27, in get_entries
+    return make_response(data, 200)
+  File "C:\Users\Dominic\AppData\Roaming\Python\Python37\site-packages\flask\helpers.py", line 223, in make_response
+    return current_app.make_response(args)
+  File "C:\Users\Dominic\AppData\Roaming\Python\Python37\site-packages\flask\app.py", line 2131, in make_response
+    " {rv.__class__.__name__}.".format(rv=rv)
+TypeError: The view function did not return a valid response. The return type must be a string, dict, tuple, Response instance, or WSGI callable, but it was a list.
+-----------END-----------
+
+----------START----------
+##2021-04-22 14:03:36
+Traceback (most recent call last):
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\controllers\CustomController.py", line 17, in get_types
+    return make_response(data, 200)
+  File "C:\Users\Dominic\AppData\Roaming\Python\Python37\site-packages\flask\helpers.py", line 223, in make_response
+    return current_app.make_response(args)
+  File "C:\Users\Dominic\AppData\Roaming\Python\Python37\site-packages\flask\app.py", line 2131, in make_response
+    " {rv.__class__.__name__}.".format(rv=rv)
+TypeError: The view function did not return a valid response. The return type must be a string, dict, tuple, Response instance, or WSGI callable, but it was a list.
+-----------END-----------
+
+----------START----------
+##2021-04-22 14:03:36
+Traceback (most recent call last):
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\controllers\CustomController.py", line 27, in get_entries
+    return make_response(data, 200)
+  File "C:\Users\Dominic\AppData\Roaming\Python\Python37\site-packages\flask\helpers.py", line 223, in make_response
+    return current_app.make_response(args)
+  File "C:\Users\Dominic\AppData\Roaming\Python\Python37\site-packages\flask\app.py", line 2131, in make_response
+    " {rv.__class__.__name__}.".format(rv=rv)
+TypeError: The view function did not return a valid response. The return type must be a string, dict, tuple, Response instance, or WSGI callable, but it was a list.
+-----------END-----------
+
+----------START----------
+##2021-04-22 22:16:16
+Traceback (most recent call last):
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\controllers\UserController.py", line 33, in create
+    user_id = data.get("user_id")
+AttributeError: 'NoneType' object has no attribute 'get'
+-----------END-----------
+
+----------START----------
+##2021-04-22 22:17:51
+Traceback (most recent call last):
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\controllers\UserController.py", line 39, in create
+    self.__user.create_new_user(user_id, email, name)
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\models\User.py", line 37, in create_new_user
+    self.__db.insert_data(query)
+  File "C:\Users\Dominic\TrainingDiary\training-diary-backend\models\DbAccess.py", line 53, in insert_data
+    cursor.execute(query)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "users_pkey"
+DETAIL:  Key (user_id)=(u030) already exists.
+-----------END-----------
+

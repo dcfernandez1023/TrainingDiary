@@ -14,7 +14,7 @@ class CustomController:
     def get_types(self, user_id):
         try:
             data = self.__custom.get_user_custom_types(user_id)
-            return make_response(data, 200)
+            return make_response({"data": data}, 200)
         except Exception:
             error_logger.log_error()
             return make_response({}, 500)
@@ -24,7 +24,7 @@ class CustomController:
     def get_entries(self, user_id):
         try:
             data = self.__custom.get_user_custom_entries(user_id)
-            return make_response(data, 200)
+            return make_response({"data": data}, 200)
         except Exception:
             error_logger.log_error()
             return make_response({}, 500)

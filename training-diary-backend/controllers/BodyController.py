@@ -6,7 +6,6 @@ from utilities import error_logger
 import uuid
 
 
-# TODO: implement API authentication and return API tokens on success
 class BodyController:
     def __init__(self):
         self.__db = DbAccess.DbAccess()
@@ -17,7 +16,7 @@ class BodyController:
     def get_all(self, user_id):
         try:
             data = self.__body.get_user_body_entries(user_id)
-            return make_response(data, 200)
+            return make_response({"data": data}, 200)
         except Exception:
             error_logger.log_error()
             return make_response({}, 500)

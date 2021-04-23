@@ -5,7 +5,6 @@ from flask import make_response
 from utilities import error_logger
 
 
-# TODO: implement API authentication and return API tokens on success
 class UserController:
     # Constructor - initializes a User model object and a DbAccess model object
     def __init__(self):

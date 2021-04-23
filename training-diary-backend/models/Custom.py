@@ -74,11 +74,9 @@ class Custom:
     def update_custom_type(self, custom_id, data):
         if "custom_schema" in data:
             custom_type = json.dumps(data.get("custom_schema")).replace("'", '"')
-            print("PARSED: " + custom_type)
             data.update({"custom_schema": custom_type})
         query = self.__query_builder.build_update_query(self.CUSTOM_TYPE_TABLE, data,
                                                         {"custom_id": ["custom_id", "=", custom_id]})
-        print(query)
         self.__db.update_data(query)
 
     def update_custom_entry(self, custom_entry_id, custom_id, data):
@@ -114,8 +112,6 @@ class Custom:
         if len(data) == 0:
             raise Exception("NoCustomSchemaExists")
         custom_schema = json.loads(json.dumps(data[0][0]))
-        print(str(custom_schema))
-        print(str(custom_entry))
         if custom_schema.keys() != custom_entry.keys():
             raise Exception("CustomSchemaDoesNotMatch")
         return True
