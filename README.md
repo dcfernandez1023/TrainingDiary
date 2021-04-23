@@ -41,5 +41,3 @@ The main directories and files of this application:
 - Gunicorn
 - PostgreSQL
 - Heroku (deployment)
-
-`training-diary-backend` contains all the files for the python backend to operate. The `blueprints` directory contains the endpoints that the Flask app will expose as well as the logic behind each endpoint.
