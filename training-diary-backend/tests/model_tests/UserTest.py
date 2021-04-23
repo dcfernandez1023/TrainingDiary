@@ -1,7 +1,8 @@
 # Simple unit tests for User class
 
 from tests import TestAssertion
-from models import User, DbAccess
+from models import User
+from db import DbAccess
 
 db = DbAccess.DbAccess()
 test = TestAssertion.TestAssertion()

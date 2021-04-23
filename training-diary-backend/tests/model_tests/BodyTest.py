@@ -1,7 +1,8 @@
 # Simple unit tests for Body class
 
 from tests import TestAssertion
-from models import Body, DbAccess
+from models import Body
+from db import DbAccess
 from pprint import pprint
 
 db = DbAccess.DbAccess()

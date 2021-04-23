@@ -1,6 +1,7 @@
 # Controller class for Diet model
 
-from models import DbAccess, Diet
+from models import Diet
+from db import DbAccess
 from flask import make_response
 from utilities import error_logger
 

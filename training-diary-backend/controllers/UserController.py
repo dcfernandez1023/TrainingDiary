@@ -1,6 +1,7 @@
 # Controller class for the User model
 
-from models import DbAccess, User
+from models import User
+from db import DbAccess
 from flask import make_response
 from utilities import error_logger
 

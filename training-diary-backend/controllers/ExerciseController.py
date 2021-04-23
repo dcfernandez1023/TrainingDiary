@@ -1,6 +1,7 @@
 # Controller class for Exercise model
 
-from models import DbAccess, Exercise
+from models import Exercise
+from db import DbAccess
 from flask import make_response
 from utilities import error_logger
 import uuid

@@ -1,6 +1,7 @@
 # Controller class for Body model
 
-from models import DbAccess, Body
+from models import Body
+from db import DbAccess
 from flask import make_response
 from utilities import error_logger
 import uuid

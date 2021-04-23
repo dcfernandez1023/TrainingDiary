@@ -1,7 +1,8 @@
 # Simple unit tests for Exercise class
 
 from tests import TestAssertion
-from models import Exercise, DbAccess
+from models import Exercise
+from db import DbAccess
 from pprint import pprint
 
 db = DbAccess.DbAccess()

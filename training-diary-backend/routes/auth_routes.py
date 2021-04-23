@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from controllers import ApiAuthController
-from models import User, DbAccess
-
+from models import User
+from db import DbAccess
 
 auth_blueprint = Blueprint("auth_blueprint", __name__)
 

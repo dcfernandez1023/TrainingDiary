@@ -1,7 +1,8 @@
 # Simple unit tests for Diet class
 
 from tests import TestAssertion
-from models import Diet, DbAccess
+from models import Diet
+from db import DbAccess
 
 db = DbAccess.DbAccess()
 test = TestAssertion.TestAssertion()

@@ -1,7 +1,7 @@
 # Simple unit tests for DbAccess class
 
 from tests import TestAssertion
-from models import DbAccess
+from db import DbAccess
 
 test = TestAssertion.TestAssertion()
 test.print_test_name("DbAccess Tests")

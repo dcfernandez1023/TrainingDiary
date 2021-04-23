@@ -1,7 +1,8 @@
 # Simple unit tests for Custom class
 
 from tests import TestAssertion
-from models import Custom, DbAccess
+from models import Custom
+from db import DbAccess
 from pprint import pprint
 
 db = DbAccess.DbAccess()    
