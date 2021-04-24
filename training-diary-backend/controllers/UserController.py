@@ -36,7 +36,7 @@ class UserController:
             name = data.get("name")
             # if insufficient data was provided to create a user, return 400 (bad request)
             if user_id is None or email is None or name is None:
-                return make_response({}, 400)
+                return make_response({"message": "Insufficient data for User object"}, 400)
             self.__user.create_new_user(user_id, email, name)
             return make_response({}, 200)
         except Exception:
@@ -52,7 +52,7 @@ class UserController:
         try:
             user_id = data.get("user_id")
             if user_id is None:
-                return make_response({}, 400)
+                return make_response({"message": "Attribute 'user_id' is not satisfied"}, 400)
             self.__user.update_user_info(user_id, data)
             return make_response({}, 200)
         except Exception:

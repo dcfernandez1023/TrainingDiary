@@ -34,7 +34,30 @@ class ApiAuthController:
         return False
 
     def generate_unauthorized_response(self):
-        return make_response({}, 401)
+        return make_response({"message": "Not authorized"}, 401)
+
+    # Checks the data being sent in to ensure that the data truly belongs to the user sending the request.
+    # Since all objects/schemas of this application have a user_id, this checks against the user_id from
+    # the request and the user_id from the request's payload to ensure they match
+    def is_valid_payload(self, user_id, data):
+        payload_user_id = ""
+        if isinstance(data, dict):
+            payload_user_id = data.get("user_id")
+        elif isinstance(data, str):
+            payload_user_id = data
+        elif isinstance(data, list):
+            for obj in data:
+                payload_user_id = obj.get("user_id")
+                if payload_user_id is None or user_id is None:
+                    return False
+                if payload_user_id != user_id:
+                    return False
+            return True
+        if payload_user_id is None or user_id is None:
+            return False
+        if payload_user_id == user_id:
+            return True
+        return False
 
     def __decode_token(self, token):
         try:

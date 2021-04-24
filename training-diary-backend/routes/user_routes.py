@@ -23,12 +23,12 @@ def post_user():
     return user_controller.create(data)
 
 
-@user_blueprint.route("/api/user/putUser", methods=["POST"])
+@user_blueprint.route("/api/user/putUser", methods=["POST", "PUT"])
 def put_user():
     token = request.headers.get("token")
     user_id = request.headers.get("user_id")
     data = request.get_json().get("data")
-    if auth.is_valid_token(token, user_id):
+    if auth.is_valid_token(token, user_id) and auth.is_valid_payload(user_id, data):
         return user_controller.update(data)
     return auth.generate_unauthorized_response()
 

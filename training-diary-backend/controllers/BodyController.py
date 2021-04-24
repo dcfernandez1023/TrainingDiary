@@ -56,10 +56,12 @@ class BodyController:
     # @param data - json/dictionary data coming from http request
     def create_bw_entry(self, data):
         try:
+            bw_id = "body_weight" + str(uuid.uuid1())
+            data.update({"bw_id": bw_id})
             for attribute in Body.Body.BODY_WEIGHT_SCHEMA:
                 if data.get(attribute) is None:
-                    return make_response({}, 400)
-            bw_id = "body_weight" + str(uuid.uuid1())
+                    message = "Attribute " + "'" + attribute + "'" + " is not satisfied"
+                    return make_response({"message": message}, 400)
             user_id = data.get("user_id")
             weight = data.get("weight")
             units = data.get("units")
@@ -80,10 +82,12 @@ class BodyController:
     # @param data - json/dictionary data coming from http request
     def create_bf_entry(self, data):
         try:
+            bf_id = "body_fat" + str(uuid.uuid1())
+            data.update({"bf_id": bf_id})
             for attribute in Body.Body.BODY_FAT_SCHEMA:
                 if data.get(attribute) is None:
-                    return make_response({}, 400)
-            bf_id = "body_fat" + str(uuid.uuid1())
+                    message = "Attribute " + "'" + attribute + "'" + " is not satisfied"
+                    return make_response({"message": message}, 400)
             user_id = data.get("user_id")
             percentage = data.get("percentage")
             timestamp = data.get("timestamp")
@@ -101,12 +105,14 @@ class BodyController:
 
     def update_bw_entry(self, data):
         try:
+            bw_id = data.get("bw_id")
+            data.update({"bw_id": bw_id})
             for key in data.keys():
                 if key not in Body.Body.BODY_WEIGHT_SCHEMA:
-                    return make_response({}, 400)
-            bw_id = data.get("bw_id")
+                    message = "Attribute " + "'" + key + "'" + " is not satisfied"
+                    return make_response({"message": message}, 400)
             if bw_id is None:
-                return make_response({}, 400)
+                return make_response({"message": "Attribute 'bw_id' is not satisfied"}, 400)
             self.__body.update_body_weight_entry(bw_id, data)
             return make_response({}, 200)
         except Exception:
@@ -117,12 +123,14 @@ class BodyController:
 
     def update_bf_entry(self, data):
         try:
+            bf_id = data.get("bf_id")
+            data.update({"bf_id": bf_id})
             for key in data.keys():
                 if key not in Body.Body.BODY_FAT_SCHEMA:
-                    return make_response({}, 400)
-            bf_id = data.get("bf_id")
+                    message = "Attribute " + "'" + key + "'" + " is not satisfied"
+                    return make_response({"message": message}, 400)
             if bf_id is None:
-                return make_response({}, 400)
+                return make_response({"message": "Attribute 'bf_id' is not satisfied"}, 400)
             self.__body.update_body_fat_entry(bf_id, data)
             return make_response({}, 200)
         except Exception:

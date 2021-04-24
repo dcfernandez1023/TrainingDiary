@@ -57,18 +57,21 @@ class ExerciseController:
     def create_exercises(self, data):
         try:
             exercises = []
+            created_ids = []
             for exercise in data:
                 fields = []
-                exercise_id = "exercise_entry" + str(uuid.uuid1())
-                exercise.update({"exercise_entry_id": exercise_id})
+                exercise_id = "exercise" + str(uuid.uuid1())
+                exercise.update({"exercise_id": exercise_id})
                 for attribute in self.__exercise.EXERCISE_SCHEMA:
                     value = exercise.get(attribute)
                     if value is None:
-                        return make_response({}, 400)
+                        message = "Attribute " + "'" + attribute + "'" + " is not satisfied"
+                        return make_response({"message": message}, 400)
                     fields.append(value)
                 exercises.append(fields)
+                created_ids.append(exercise_id)
             self.__exercise.create_new_exercises(exercises)
-            return make_response({"data": exercises}, 200)
+            return make_response({"data": created_ids}, 200)
         except Exception:
             error_logger.log_error()
             return make_response({}, 500)
@@ -80,6 +83,7 @@ class ExerciseController:
     def create_entries(self, data):
         try:
             entries = []
+            created_ids = []
             for entry in data:
                 fields = []
                 exercise_entry_id = "exercise_entry" + str(uuid.uuid1())
@@ -87,11 +91,13 @@ class ExerciseController:
                 for attribute in self.__exercise.EXERCISE_ENTRY_SCHEMA:
                     value = entry.get(attribute)
                     if value is None:
-                        return make_response({}, 400)
+                        message = "Attribute " + "'" + attribute + "'" + " is not satisfied"
+                        return make_response({"message": message}, 400)
                     fields.append(value)
                 entries.append(fields)
+                created_ids.append(exercise_entry_id)
             self.__exercise.create_new_exercise_entries(entries)
-            return make_response({"data": entries}, 200)
+            return make_response({"data": created_ids}, 200)
         except Exception:
             error_logger.log_error()
             return make_response({}, 500)
@@ -102,10 +108,12 @@ class ExerciseController:
         try:
             for key in data.keys():
                 if key not in self.__exercise.EXERCISE_SCHEMA:
-                    return make_response({}, 400)
+                    message = "Attribute " + "'" + key + "'" + " is not satisfied"
+                    return make_response({"message": message}, 400)
             exercise_id = data.get("exercise_id")
             if exercise_id is None:
-                return make_response({}, 400)
+                message = "Attribute 'exercise_id' is not satisfied"
+                return make_response({"message": message}, 400)
             self.__exercise.update_exercise(exercise_id, data)
             return make_response({}, 200)
         except Exception:
@@ -118,10 +126,12 @@ class ExerciseController:
         try:
             for key in data.keys():
                 if key not in self.__exercise.EXERCISE_ENTRY_SCHEMA:
-                    return make_response({}, 400)
-            exercise_entry_id = data.get("exercise_id")
+                    message = "Attribute " + "'" + key + "'" + " is not satisfied"
+                    return make_response({"message": message}, 400)
+            exercise_entry_id = data.get("exercise_entry_id")
             if exercise_entry_id is None:
-                return make_response({}, 400)
+                message = "Attribute 'exercise_entry_id' is not satisfied"
+                return make_response({"message": message}, 400)
             self.__exercise.update_exercise_entry(exercise_entry_id, data)
             return make_response({}, 200)
         except Exception:

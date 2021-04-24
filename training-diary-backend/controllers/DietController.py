@@ -46,7 +46,7 @@ class DietController:
             notes = data.get("notes")
             if user_id is None or day is None or month is None or year is None or calories is None or protein is None \
             or carbs is None or fat is None or notes is None:
-                return make_response({}, 400)
+                return make_response({"message": "Attributes not satisfied"}, 400)
             self.__diet.create_new_diet_entry(user_id, day, month, year, calories, protein, carbs, fat, notes)
             return make_response({}, 200)
         except Exception:
@@ -62,7 +62,7 @@ class DietController:
             month = int(data.get("month"))
             year = int(data.get("year"))
             if user_id is None or day is None or month is None or year is None:
-                return make_response({}, 400)
+                return make_response({"message": "Attributes not satisfied"}, 400)
             self.__diet.update_diet_entry(user_id, day, month, year, data)
             return make_response({}, 200)
         except Exception:

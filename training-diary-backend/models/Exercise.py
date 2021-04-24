@@ -91,6 +91,14 @@ class Exercise:
     # Creates many new exercises entries
     # @param exercise_entries - a list of lists where each inner list holds the data for an exercise entry
     def create_new_exercise_entries(self, exercise_entries):
+        for entry in exercise_entries:
+            exercise_id = entry[1]
+            check_query = self.__query_builder.build_select_query(["Exercises"],
+                                                                  [],
+                                                                  {"exercise_id": ["exercise_id", "=", exercise_id]})
+            res = self.__db.get_data(check_query)
+            if len(res) == 0:
+                raise Exception("ExerciseDoesNotExist: Cannot create new exercise entry for a non-existent exercise")
         query = self.__query_builder.build_insert_query(self.EXERCISE_ENTRY_TABLE, exercise_entries)
         self.__db.insert_data(query)
 

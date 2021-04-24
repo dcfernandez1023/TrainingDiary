@@ -30,7 +30,7 @@ def post_exercises():
     token = request.headers.get("token")
     user_id = request.headers.get("user_id")
     data = request.get_json().get("data")
-    if auth.is_valid_token(token, user_id):
+    if auth.is_valid_token(token, user_id) and auth.is_valid_payload(user_id, data):
         return exercise_controller.create_exercises(data)
     return auth.generate_unauthorized_response()
 
@@ -40,8 +40,8 @@ def post_entries():
     token = request.headers.get("token")
     user_id = request.headers.get("user_id")
     data = request.get_json().get("data")
-    if auth.is_valid_token(token, user_id):
-        return exercise_controller.create_exercises(data)
+    if auth.is_valid_token(token, user_id) and auth.is_valid_payload(user_id, data):
+        return exercise_controller.create_entries(data)
     return auth.generate_unauthorized_response()
 
 
@@ -50,17 +50,17 @@ def put_exercise():
     token = request.headers.get("token")
     user_id = request.headers.get("user_id")
     data = request.get_json().get("data")
-    if auth.is_valid_token(token, user_id):
+    if auth.is_valid_token(token, user_id) and auth.is_valid_payload(user_id, data):
         return exercise_controller.update_exercise(data)
     return auth.generate_unauthorized_response()
 
 
 @exercise_blueprint.route("/api/exercise/putEntry", methods=["POST", "PUT"])
-def put_exercise():
+def put_entry():
     token = request.headers.get("token")
     user_id = request.headers.get("user_id")
     data = request.get_json().get("data")
-    if auth.is_valid_token(token, user_id):
+    if auth.is_valid_token(token, user_id) and auth.is_valid_payload(user_id, data):
         return exercise_controller.update_entry(data)
     return auth.generate_unauthorized_response()
 

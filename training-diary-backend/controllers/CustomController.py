@@ -38,7 +38,7 @@ class CustomController:
             user_id = data.get("user_id")
             custom_schema = data.get("custom_schema")
             if custom_id is None or user_id is None or custom_schema is None:
-                return make_response({}, 400)
+                return make_response({"message": "Attributes not satisfied"}, 400)
             self.__custom.create_new_custom_type(custom_id, user_id, custom_schema)
             return make_response({"custom_id": custom_id}, 200)
         except Exception:
@@ -60,7 +60,7 @@ class CustomController:
             notes = data.get("notes")
             if custom_entry_id is None or custom_id is None or user_id is None or custom_entry is None \
             or timestamp is None or day is None or month is None or year is None or notes is None:
-                return make_response({}, 400)
+                return make_response({"message": "Attributes not satisfied"}, 400)
         except Exception:
             error_logger.log_error()
             return make_response({}, 500)
@@ -71,7 +71,7 @@ class CustomController:
         try:
             custom_id = data.get("custom_id")
             if custom_id is None:
-                return make_response({}, 400)
+                return make_response({"message": "Attributes not satisfied"}, 400)
             self.__custom.update_custom_type(custom_id, data)
             return make_response({}, 200)
         except Exception:
@@ -83,9 +83,10 @@ class CustomController:
     def update_entry(self, data):
         try:
             custom_entry_id = data.get("custom_entry_id")
+            custom_id = data.get("custom_id")
             if custom_entry_id is None:
-                return make_response({}, 400)
-            self.__custom.update_custom_entry(custom_entry_id, data)
+                return make_response({"message": "Attributes not satisfied"}, 400)
+            self.__custom.update_custom_entry(custom_entry_id, custom_id, data)
             return make_response({}, 200)
         except Exception:
             error_logger.log_error()
