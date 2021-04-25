@@ -1,0 +1,23 @@
+.top-spacing {
+  height: 100px;
+}
+
+.input-spacing {
+    margin-bottom: 5%;
+}
+
+.training-diary-title {
+  margin-top: 3%;
+  text-align: center;
+}
+
+.dumbbell-logo {
+  margin-left: 2%;
+  margin-bottom: 2%;
+  width: 25px;
+  height: 25px;
+}
+
+.login-background-color {
+  background-color: #A2D9CE;
+}

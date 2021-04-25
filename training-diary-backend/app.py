@@ -4,10 +4,12 @@ from routes.body_routes import body_blueprint
 from routes.diet_routes import diet_blueprint
 from routes.exercise_routes import exercise_blueprint
 from routes.user_routes import user_blueprint
+from flask_cors import CORS
 
 # driver code
 app = Flask(__name__)
 if __name__ == "__main__":
+    CORS(app)
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(body_blueprint)
     app.register_blueprint(diet_blueprint)
