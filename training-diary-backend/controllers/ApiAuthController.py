@@ -11,6 +11,10 @@ class ApiAuthController:
     def __init__(self):
         self.__secret_key = os.getenv("TD_API_AUTH")
 
+    def tokenize_response_header(self, res, user_id):
+        res.headers["token"] = self.encode_token(user_id)
+        return res
+
     def encode_token(self, user_id):
         try:
             payload = {

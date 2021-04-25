@@ -52,6 +52,24 @@ class ExerciseController:
         finally:
             self.__db.close_connection()
 
+    def create_exercise(self, data):
+        try:
+            exercise_id = "exercise" + str(uuid.uuid1())
+            data.update({"exercise_id": exercise_id})
+            for attribute in self.__exercise.EXERCISE_SCHEMA:
+                value = data.get(attribute)
+                if value is None:
+                    message = "Attribute " + "'" + attribute + "'" + " is not satisfied"
+                    return make_response({"message": message}, 400)
+            self.__exercise.create_new_exercise(exercise_id, data.get("user_id"), data.get("name"), data.get("category"),
+                                                data.get("sets"), data.get("reps"), data.get("amount"), data.get("units"))
+            return make_response({"data": exercise_id}, 200)
+        except Exception:
+            error_logger.log_error()
+            return make_response({}, 500)
+        finally:
+            self.__db.close_connection()
+
     # Creates one or many exercises
     # @param data - a list of json/dictionaries containing the data for the exercises
     def create_exercises(self, data):

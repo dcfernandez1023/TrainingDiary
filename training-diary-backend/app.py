@@ -9,10 +9,10 @@ from flask_cors import CORS
 # driver code
 app = Flask(__name__)
 if __name__ == "__main__":
-    CORS(app)
+    CORS(app, expose_headers=["token"])
     app.register_blueprint(auth_blueprint)
     app.register_blueprint(body_blueprint)
     app.register_blueprint(diet_blueprint)
     app.register_blueprint(exercise_blueprint)
     app.register_blueprint(user_blueprint)
-    app.run()
+    app.run(debug=True)

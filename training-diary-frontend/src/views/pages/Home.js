@@ -22,6 +22,7 @@ function Home(props) {
           </Navbar>
         </Col>
       </Row>
+      <br/>
       <Row>
         <Col md = {7}>
 

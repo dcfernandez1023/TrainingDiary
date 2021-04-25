@@ -1,0 +1,11 @@
+.add-exercise-button {
+  float: right;
+}
+
+.modal-input-spacing {
+  margin-bottom: 10px;
+}
+
+.exercise-card-height {
+  max-height: 400px;
+}
