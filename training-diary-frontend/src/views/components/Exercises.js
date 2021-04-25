@@ -10,6 +10,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import Spinner from 'react-bootstrap/Spinner';
+import ListGroup from 'react-bootstrap/ListGroup';
 
 /* Application imports */
 import AddExerciseModal from './AddExerciseModal.js';
@@ -21,7 +23,7 @@ const LOCALSTORAGE = require('../../controllers/localStorageHelper.js');
 
 function Exercises(props) {
 
-  const[exercises, setExercises] = useState([]);
+  const[exercises, setExercises] = useState();
   const[show, setShow] = useState(false);
 
   useEffect(() => {
@@ -83,7 +85,7 @@ function Exercises(props) {
       />
       <Row>
         <Col>
-          <Card className = "exercise-card-height">
+          <Card className = "exercise-card-height" border = "light">
             <Card.Header as = "h5">
               <Row>
                 <Col>
@@ -99,10 +101,34 @@ function Exercises(props) {
               </Row>
             </Card.Header>
             <Card.Body>
-              {exercises.length === 0 ?
-                <p> You don't have any exercises... </p>
+              {exercises === undefined ?
+                <div className = "exercise-spinner-align">
+                  <Spinner animation = "border" />
+                </div>
                 :
-                <p> You have exercises </p>
+                <div>
+                  {exercises.length === 0 ?
+                    <p> You don't have any exercises... </p>
+                    :
+                    <Row>
+                      {exercises.map((exercise) => {
+                        return (
+                          <Col md = {4}>
+                            <Card>
+                              <Card.Header> {exercise.name} </Card.Header>
+                              <Card.Body>
+                                <ListGroup variant = "flush">
+                                  <ListGroup.Item> <strong>Sets/Reps</strong>: {exercise.sets} x {exercise.reps} </ListGroup.Item>
+                                  <ListGroup.Item> <strong>Amount/Units</strong>: {exercise.amount} {exercise.units} </ListGroup.Item>
+                                </ListGroup>
+                              </Card.Body>
+                            </Card>
+                          </Col>
+                        );
+                      })}
+                    </Row>
+                  }
+                </div>
               }
             </Card.Body>
           </Card>

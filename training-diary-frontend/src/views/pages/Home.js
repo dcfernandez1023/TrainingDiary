@@ -17,7 +17,7 @@ function Home(props) {
     <Container fluid>
       <Row>
         <Col>
-          <Navbar bg = "light">
+          <Navbar bg = "dark">
             <Navbar.Brand href = "/"> TrainingDiary </Navbar.Brand>
           </Navbar>
         </Col>

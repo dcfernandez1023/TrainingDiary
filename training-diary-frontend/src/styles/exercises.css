@@ -9,3 +9,7 @@
 .exercise-card-height {
   max-height: 400px;
 }
+
+.exercise-spinner-align {
+  text-align: center;
+}
