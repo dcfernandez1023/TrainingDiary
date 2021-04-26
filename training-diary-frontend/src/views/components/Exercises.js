@@ -12,9 +12,12 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Badge from 'react-bootstrap/Badge';
 
 /* Application imports */
 import AddExerciseModal from './AddExerciseModal.js';
+import DeleteModal from './DeleteModal.js';
+import EditExerciseModal from './EditExerciseModal.js';
 
 /* Controller imports */
 const EXERCISE_CONTROLLER = require('../../controllers/exerciseController.js');
@@ -24,7 +27,11 @@ const LOCALSTORAGE = require('../../controllers/localStorageHelper.js');
 function Exercises(props) {
 
   const[exercises, setExercises] = useState();
-  const[show, setShow] = useState(false);
+  const[addShow, setAddShow] = useState(false);
+  const[deleteShow, setDeleteShow] = useState(false);
+  const[editShow, setEditShow] = useState(false);
+  const[exerciseToEdit, setExerciseToEdit] = useState();
+  const[exerciseToDelete, setExerciseToDelete] = useState();
 
   useEffect(() => {
     getExercises();
@@ -34,7 +41,6 @@ function Exercises(props) {
     var token = LOCALSTORAGE.getStorageItem("training-diary-token");
     const callback = (res) => {
       setExercises(res.data.data);
-      LOCALSTORAGE.setStorageItem("training-diary-token", res.headers.token);
     }
     const callbackOnError = (error) => {
       console.log(error);
@@ -68,24 +74,109 @@ function Exercises(props) {
     EXERCISE_CONTROLLER.createExercise(props.userInfo.uid, token, exercise, callback, callbackOnError);
   }
 
-  const openModal = () => {
-    setShow(true);
+  const editExercise = (exercise, modalCallback) => {
+    if(props.userInfo === undefined || props.userInfo === null) {
+      return;
+    }
+    if(exercise === undefined || exercise === null) {
+      return;
+    }
+    var token = LOCALSTORAGE.getStorageItem("training-diary-token");
+    const callback = (res, editedExercise) => {
+      var exercisesCopy = exercises.slice();
+      for(var i = 0; i < exercisesCopy.length; i++) {
+        if(exercisesCopy[i].exercise_id === editedExercise.exercise_id) {
+          exercisesCopy[i] = editedExercise;
+        }
+      }
+      setExercises(exercisesCopy);
+      modalCallback();
+    };
+    const callbackOnError = (error) => {
+      console.log(error);
+      modalCallback();
+    }
+    EXERCISE_CONTROLLER.editExercise(props.userInfo.uid, token, exercise, callback, callbackOnError);
   }
 
-  const closeModal = () => {
-    setShow(false);
+  const deleteExercise = (modalCallback) => {
+    if(props.userInfo === undefined || props.userInfo === null) {
+      return;
+    }
+    if(exerciseToDelete === undefined || exerciseToDelete === null) {
+      return;
+    }
+    var token = LOCALSTORAGE.getStorageItem("training-diary-token");
+    const callback = (res, exercise_id) => {
+      var exercisesCopy = exercises.slice();
+      for(var i = 0; i < exercisesCopy.length; i++) {
+        let exercise = exercisesCopy[i];
+        if(exercise.exercise_id === exercise_id) {
+          exercisesCopy.splice(i, 1);
+        }
+      }
+      setExercises(exercisesCopy);
+      closeDeleteModal();
+    }
+    const callbackOnError = (error) => {
+      console.log(error);
+      closeDeleteModal();
+    }
+    EXERCISE_CONTROLLER.deleteExercise(props.userInfo.uid, token, exerciseToDelete, callback, callbackOnError);
+  }
+
+  const openAddModal = () => {
+    setAddShow(true);
+  }
+
+  const closeAddModal = () => {
+    setAddShow(false);
+  }
+
+  const openDeleteModal = (exercise_id) => {
+    setExerciseToDelete(exercise_id);
+    setDeleteShow(true);
+  }
+
+  const closeDeleteModal = () => {
+    setDeleteShow(false);
+    setExerciseToDelete();
+  }
+
+  const openEditModal = (exercise) => {
+    setExerciseToEdit(exercise);
+    setEditShow(true);
+  }
+
+  const closeEditModal = () => {
+    setExerciseToEdit();
+    setEditShow(false);
   }
 
   return (
     <Container fluid>
       <AddExerciseModal
-        show = {show}
-        closeModal = {closeModal}
+        show = {addShow}
+        closeModal = {closeAddModal}
         createExercise = {createExercise}
+      />
+      <EditExerciseModal
+        show = {editShow}
+        closeModal = {closeEditModal}
+        editExercise = {editExercise}
+        exercise = {exerciseToEdit}
+      />
+      <DeleteModal
+        show = {deleteShow}
+        closeModal = {closeDeleteModal}
+        onClickYes = {deleteExercise}
+        onClickNo = {closeDeleteModal}
+        header = "Delete Exercise"
+        prompt = "Are you sure you want to delete this exercise?"
       />
       <Row>
         <Col>
-          <Card className = "exercise-card-height" border = "light">
+          <Card className = "exercise-card-height">
             <Card.Header as = "h5">
               <Row>
                 <Col>
@@ -93,14 +184,14 @@ function Exercises(props) {
                 </Col>
                 <Col>
                   <Button className = "add-exercise-button" size = "sm" variant = "outline-dark"
-                    onClick = {openModal}
+                    onClick = {openAddModal}
                   >
                     +
                   </Button>
                 </Col>
               </Row>
             </Card.Header>
-            <Card.Body>
+            <Card.Body className = "exercise-card-scroll">
               {exercises === undefined ?
                 <div className = "exercise-spinner-align">
                   <Spinner animation = "border" />
@@ -111,15 +202,40 @@ function Exercises(props) {
                     <p> You don't have any exercises... </p>
                     :
                     <Row>
-                      {exercises.map((exercise) => {
+                      {exercises.map((exercise, index) => {
                         return (
-                          <Col md = {4}>
-                            <Card>
-                              <Card.Header> {exercise.name} </Card.Header>
-                              <Card.Body>
+                          <Col md = {6} key = {index}>
+                            <Card className = "exercise-card-spacing">
+                              <Card.Header className = "exercise-header-padding">
+                                <Row>
+                                  <Col xs = {8}>
+                                    <p> {exercise.name} </p>
+                                  </Col>
+                                  <Col xs = {4}>
+                                    <Button className = "exercise-btn-option-align" variant = "outline-dark" size = "sm"
+                                      onClick = {() => {openDeleteModal(exercise.exercise_id)}}
+                                    >
+                                      🗑️
+                                    </Button>
+                                    <Button className = "exercise-btn-option-align" variant = "outline-dark" size = "sm"
+                                      onClick = {() => {openEditModal(exercise)}}
+                                    >
+                                      ✏️
+                                    </Button>
+                                  </Col>
+                                </Row>
+                              </Card.Header>
+                              <Card.Body className = "exercise-card-body-padding">
+                                <Badge pill variant = "light"> {exercise.category} </Badge>
                                 <ListGroup variant = "flush">
-                                  <ListGroup.Item> <strong>Sets/Reps</strong>: {exercise.sets} x {exercise.reps} </ListGroup.Item>
-                                  <ListGroup.Item> <strong>Amount/Units</strong>: {exercise.amount} {exercise.units} </ListGroup.Item>
+                                  <ListGroup.Item>
+                                     <small> Sets/Reps: </small>
+                                     {exercise.sets} x {exercise.reps}
+                                   </ListGroup.Item>
+                                   <ListGroup.Item>
+                                     <small> Amount/Units: </small>
+                                     {exercise.amount} {exercise.units}
+                                   </ListGroup.Item>
                                 </ListGroup>
                               </Card.Body>
                             </Card>

@@ -17,17 +17,17 @@ function Home(props) {
     <Container fluid>
       <Row>
         <Col>
-          <Navbar bg = "dark">
+          <Navbar bg = "dark" variant = "dark">
             <Navbar.Brand href = "/"> TrainingDiary </Navbar.Brand>
           </Navbar>
         </Col>
       </Row>
       <br/>
       <Row>
-        <Col md = {7}>
+        <Col lg = {6}>
 
         </Col>
-        <Col md = {5}>
+        <Col lg = {6}>
           <Exercises
             userInfo = {props.userInfo}
           />

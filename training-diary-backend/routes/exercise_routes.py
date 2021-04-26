@@ -65,6 +65,9 @@ def put_exercise():
     token = request.headers.get("token")
     user_id = request.headers.get("user_id")
     data = request.get_json().get("data")
+    print(token)
+    print(user_id)
+    print(data)
     if auth.is_valid_token(token, user_id) and auth.is_valid_payload(user_id, data):
         res = auth.tokenize_response_header(exercise_controller.update_exercise(data), user_id)
         return res

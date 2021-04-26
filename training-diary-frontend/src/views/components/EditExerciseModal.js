@@ -16,21 +16,19 @@ import Form from 'react-bootstrap/Form';
 const EXERCISE_MODEL = require('../../models/exercise.js');
 
 
-function AddExerciseModal(props) {
+function EditExerciseModal(props) {
 
-  const[newExercise, setNewExercise] = useState({});
+  const[exercise, setExercise] = useState({});
   const[show, setShow] = useState(false);
 
   useEffect(() => {
-    if(Object.keys(newExercise).length === 0) {
-      setNewExercise(Object.assign({}, EXERCISE_MODEL.exercise));
-    }
+    setExercise(props.exercise);
     setShow(props.show);
-  }, [props.show]);
+  }, [props.show, props.exercise]);
 
   const handleClose = () => {
     props.closeModal();
-    setNewExercise({});
+    setExercise({});
   }
 
   const onChangeExercise = (e) => {
@@ -39,31 +37,34 @@ function AddExerciseModal(props) {
     if(EXERCISE_MODEL.exerciseMetaData[name].type === "number" && isNaN(value)) {
       return;
     }
-    var newExerciseCopy = Object.assign({}, newExercise);
-    newExerciseCopy[name] = value;
-    setNewExercise(newExerciseCopy);
+    var exerciseCopy = Object.assign({}, exercise);
+    exerciseCopy[name] = value;
+    setExercise(exerciseCopy);
   }
 
-  const onClickCreate = () => {
-    var newExerciseCopy = Object.assign({}, newExercise);
+  const onClickEdit = () => {
+    var exerciseCopy = Object.assign({}, exercise);
     for(var i = 0; i < EXERCISE_MODEL.exerciseFields.length; i++) {
       let field = EXERCISE_MODEL.exerciseFields[i];
       let metaData = EXERCISE_MODEL.exerciseMetaData[field];
-      if(metaData.editable && newExerciseCopy[field].toString().trim().length === 0) {
+      if(metaData.editable && exerciseCopy[field].toString().trim().length === 0) {
         alert("You are missing required fields");
         return;
       }
-      if(typeof(newExerciseCopy[field]) === "number") {
-        newExerciseCopy[field] = parseInt(newExerciseCopy[field]);
+      if(typeof(exerciseCopy[field]) === "number") {
+        exerciseCopy[field] = parseInt(exerciseCopy[field]);
       }
     }
-    props.createExercise(newExerciseCopy, handleClose);
+    props.editExercise(exerciseCopy, handleClose);
   }
 
+  if(exercise === undefined || exercise === null) {
+    return <div></div>
+  }
   return (
     <Modal show = {show} onHide = {handleClose} backdrop = "static">
       <Modal.Header closeButton>
-        <Modal.Title> Create Exercise </Modal.Title>
+        <Modal.Title> Edit Exercise </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Row>
@@ -77,7 +78,7 @@ function AddExerciseModal(props) {
                     key = {field + index.toString()}
                     as = {metaData.elementType}
                     name = {field}
-                    value = {newExercise[field]}
+                    value = {exercise[field]}
                     onChange = {(e) => {onChangeExercise(e)}}
                     className = "modal-input-spacing"
                   />
@@ -93,7 +94,7 @@ function AddExerciseModal(props) {
                     as = {metaData.elementType}
                     type = {metaData.type === "number" ? "number" : "input"}
                     name = {field}
-                    value = {newExercise[field]}
+                    value = {exercise[field]}
                     onChange = {(e) => {onChangeExercise(e)}}
                     className = "modal-input-spacing"
                   >
@@ -117,9 +118,9 @@ function AddExerciseModal(props) {
           Close
         </Button>
         <Button variant = "success"
-          onClick = {() => {onClickCreate()}}
+          onClick = {() => {onClickEdit()}}
         >
-          Create
+          Done
         </Button>
       </Modal.Footer>
     </Modal>
@@ -127,4 +128,4 @@ function AddExerciseModal(props) {
 }
 
 
-export default AddExerciseModal;
+export default EditExerciseModal;

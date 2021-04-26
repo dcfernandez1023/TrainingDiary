@@ -1,3 +1,10 @@
+div, p, h1, h2, h3, h5 {
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .add-exercise-button {
   float: right;
 }
@@ -7,9 +14,43 @@
 }
 
 .exercise-card-height {
-  max-height: 400px;
+  max-height: 500px;
 }
 
 .exercise-spinner-align {
   text-align: center;
+}
+
+.exercise-card-spacing {
+  margin-bottom: 15px;
+}
+
+.exercise-card-body-padding {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.exercise-card-scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.exercise-btn-option-align {
+  float: right;
+  margin-left: 3px;
+}
+
+.exercise-header-padding {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.exercise-header-divide-text {
+  width: 80%;
+}
+
+.exercise-header-divide-button {
+  width: 20%;
 }

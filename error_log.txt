@@ -1,0 +1,136 @@
+----------START----------
+##2021-04-25 15:44:39
+Traceback (most recent call last):
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\controllers\ApiAuthController.py", line 28, in encode_token
+    algorithm="HS256"
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jwt.py", line 63, in encode
+    return api_jws.encode(json_payload, key, algorithm, headers, json_encoder)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jws.py", line 110, in encode
+    key = alg_obj.prepare_key(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\algorithms.py", line 174, in prepare_key
+    key = force_bytes(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\utils.py", line 21, in force_bytes
+    raise TypeError("Expected a string value")
+TypeError: Expected a string value
+-----------END-----------
+
+----------START----------
+##2021-04-25 15:44:56
+Traceback (most recent call last):
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\controllers\ApiAuthController.py", line 28, in encode_token
+    algorithm="HS256"
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jwt.py", line 63, in encode
+    return api_jws.encode(json_payload, key, algorithm, headers, json_encoder)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jws.py", line 110, in encode
+    key = alg_obj.prepare_key(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\algorithms.py", line 174, in prepare_key
+    key = force_bytes(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\utils.py", line 21, in force_bytes
+    raise TypeError("Expected a string value")
+TypeError: Expected a string value
+-----------END-----------
+
+----------START----------
+##2021-04-25 15:47:20
+Traceback (most recent call last):
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\controllers\ApiAuthController.py", line 28, in encode_token
+    algorithm="HS256"
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jwt.py", line 63, in encode
+    return api_jws.encode(json_payload, key, algorithm, headers, json_encoder)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jws.py", line 110, in encode
+    key = alg_obj.prepare_key(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\algorithms.py", line 174, in prepare_key
+    key = force_bytes(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\utils.py", line 21, in force_bytes
+    raise TypeError("Expected a string value")
+TypeError: Expected a string value
+-----------END-----------
+
+----------START----------
+##2021-04-25 15:51:28
+Traceback (most recent call last):
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\controllers\ApiAuthController.py", line 28, in encode_token
+    algorithm="HS256"
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jwt.py", line 63, in encode
+    return api_jws.encode(json_payload, key, algorithm, headers, json_encoder)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jws.py", line 110, in encode
+    key = alg_obj.prepare_key(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\algorithms.py", line 174, in prepare_key
+    key = force_bytes(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\utils.py", line 21, in force_bytes
+    raise TypeError("Expected a string value")
+TypeError: Expected a string value
+-----------END-----------
+
+----------START----------
+##2021-04-25 15:51:32
+Traceback (most recent call last):
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\controllers\ApiAuthController.py", line 28, in encode_token
+    algorithm="HS256"
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jwt.py", line 63, in encode
+    return api_jws.encode(json_payload, key, algorithm, headers, json_encoder)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jws.py", line 110, in encode
+    key = alg_obj.prepare_key(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\algorithms.py", line 174, in prepare_key
+    key = force_bytes(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\utils.py", line 21, in force_bytes
+    raise TypeError("Expected a string value")
+TypeError: Expected a string value
+-----------END-----------
+
+----------START----------
+##2021-04-25 15:52:57
+Traceback (most recent call last):
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\controllers\ApiAuthController.py", line 29, in encode_token
+    algorithm="HS256"
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jwt.py", line 63, in encode
+    return api_jws.encode(json_payload, key, algorithm, headers, json_encoder)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jws.py", line 110, in encode
+    key = alg_obj.prepare_key(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\algorithms.py", line 174, in prepare_key
+    key = force_bytes(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\utils.py", line 21, in force_bytes
+    raise TypeError("Expected a string value")
+TypeError: Expected a string value
+-----------END-----------
+
+----------START----------
+##2021-04-25 15:53:59
+Traceback (most recent call last):
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\controllers\ApiAuthController.py", line 29, in encode_token
+    algorithm="HS256"
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jwt.py", line 63, in encode
+    return api_jws.encode(json_payload, key, algorithm, headers, json_encoder)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\api_jws.py", line 110, in encode
+    key = alg_obj.prepare_key(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\algorithms.py", line 174, in prepare_key
+    key = force_bytes(key)
+  File "C:\Users\domin\AppData\Local\Programs\Python\Python37-32\lib\site-packages\jwt\utils.py", line 21, in force_bytes
+    raise TypeError("Expected a string value")
+TypeError: Expected a string value
+-----------END-----------
+
+----------START----------
+##2021-04-25 19:03:00
+Traceback (most recent call last):
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\controllers\ExerciseController.py", line 135, in update_exercise
+    self.__exercise.update_exercise(exercise_id, data)
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\models\Exercise.py", line 110, in update_exercise
+    self.__db.update_data(query)
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\db\DbAccess.py", line 61, in update_data
+    cursor.execute(query)
+psycopg2.errors.NumericValueOutOfRange: integer out of range
+-----------END-----------
+
+----------START----------
+##2021-04-25 19:03:16
+Traceback (most recent call last):
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\controllers\ExerciseController.py", line 135, in update_exercise
+    self.__exercise.update_exercise(exercise_id, data)
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\models\Exercise.py", line 110, in update_exercise
+    self.__db.update_data(query)
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\db\DbAccess.py", line 61, in update_data
+    cursor.execute(query)
+psycopg2.errors.NumericValueOutOfRange: integer out of range
+-----------END-----------
+
