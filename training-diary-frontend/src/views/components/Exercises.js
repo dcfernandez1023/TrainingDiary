@@ -154,7 +154,7 @@ function Exercises(props) {
   }
 
   return (
-    <Container fluid>
+    <Container>
       <AddExerciseModal
         show = {addShow}
         closeModal = {closeAddModal}
@@ -176,7 +176,7 @@ function Exercises(props) {
       />
       <Row>
         <Col>
-          <Card className = "exercise-card-height">
+          <Card>
             <Card.Header as = "h5">
               <Row>
                 <Col>
@@ -191,7 +191,7 @@ function Exercises(props) {
                 </Col>
               </Row>
             </Card.Header>
-            <Card.Body className = "exercise-card-scroll">
+            <Card.Body className = "exercise-card-scroll exercise-card-height">
               {exercises === undefined ?
                 <div className = "exercise-spinner-align">
                   <Spinner animation = "border" />
@@ -204,7 +204,7 @@ function Exercises(props) {
                     <Row>
                       {exercises.map((exercise, index) => {
                         return (
-                          <Col md = {6} key = {index}>
+                          <Col md = {6} lg = {4} sm = {12} key = {index}>
                             <Card className = "exercise-card-spacing">
                               <Card.Header className = "exercise-header-padding">
                                 <Row>
@@ -226,15 +226,14 @@ function Exercises(props) {
                                 </Row>
                               </Card.Header>
                               <Card.Body className = "exercise-card-body-padding">
-                                <Badge pill variant = "light"> {exercise.category} </Badge>
+                                <Card.Subtitle className = "mb-2 text-muted category-subtitle"> {exercise.category} </Card.Subtitle>
+                                {/*<Badge pill variant = "light"> {exercise.category} </Badge>*/}
                                 <ListGroup variant = "flush">
                                   <ListGroup.Item>
-                                     <small> Sets/Reps: </small>
-                                     {exercise.sets} x {exercise.reps}
+                                     Sets/Reps - {exercise.sets} x {exercise.reps}
                                    </ListGroup.Item>
                                    <ListGroup.Item>
-                                     <small> Amount/Units: </small>
-                                     {exercise.amount} {exercise.units}
+                                      Amount/Units - {exercise.amount} {exercise.units}
                                    </ListGroup.Item>
                                 </ListGroup>
                               </Card.Body>

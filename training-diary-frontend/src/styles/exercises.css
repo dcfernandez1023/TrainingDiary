@@ -5,6 +5,11 @@ div, p, h1, h2, h3, h5 {
     overflow: hidden;
 }
 
+.category-subtitle {
+  margin-top: 3px;
+  font-family: "Arial", "Verdana", "Helvetica", sans-serif;
+}
+
 .add-exercise-button {
   float: right;
 }
@@ -14,7 +19,7 @@ div, p, h1, h2, h3, h5 {
 }
 
 .exercise-card-height {
-  max-height: 500px;
+  /* max-height: 500px; */
 }
 
 .exercise-spinner-align {
@@ -41,8 +46,8 @@ div, p, h1, h2, h3, h5 {
 }
 
 .exercise-header-padding {
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
   padding-top: 8px;
   padding-bottom: 8px;
 }

@@ -25,16 +25,18 @@ function DeleteModal(props) {
       onHide = {props.closeModal}
       backdrop = "static"
     >
-      <Modal.Header closeButton> {props.header} </Modal.Header>
+      <Modal.Header closeButton>
+        <Modal.Title> {props.header} </Modal.Title>
+      </Modal.Header>
       <Modal.Body>
         <p> {props.prompt} </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant = "secondary" onClick = {props.onClickNo}>
-          No
-        </Button>
         <Button variant = "danger" onClick = {props.onClickYes}>
           Yes
+        </Button>
+        <Button variant = "secondary" onClick = {props.onClickNo}>
+          No
         </Button>
       </Modal.Footer>
     </Modal>

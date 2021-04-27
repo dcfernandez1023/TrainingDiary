@@ -53,6 +53,9 @@ function App() {
           />
           }
         </Route>
+        <Route exact path = "/activityAndInsights">
+
+        </Route>
       </Switch>
     </Router>
   );
