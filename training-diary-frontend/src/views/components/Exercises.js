@@ -175,78 +175,69 @@ function Exercises(props) {
         prompt = "Are you sure you want to delete this exercise?"
       />
       <Row>
+        <Col xs = {10}>
+          <h4> Exercises 💪 </h4>
+        </Col>
+        <Col xs = {2}>
+          <Button className = "add-exercise-button" variant = "outline-dark" onClick = {openAddModal}> + </Button>
+        </Col>
+      </Row>
+      <br/>
+      <Row>
         <Col>
-          <Card>
-            <Card.Header as = "h5">
-              <Row>
-                <Col>
-                  Exercises 💪
-                </Col>
-                <Col>
-                  <Button className = "add-exercise-button" size = "sm" variant = "outline-dark"
-                    onClick = {openAddModal}
-                  >
-                    +
-                  </Button>
-                </Col>
-              </Row>
-            </Card.Header>
-            <Card.Body className = "exercise-card-scroll exercise-card-height">
-              {exercises === undefined ?
-                <div className = "exercise-spinner-align">
-                  <Spinner animation = "border" />
-                </div>
+          {exercises === undefined ?
+            <div className = "exercise-spinner-align">
+              <Spinner animation = "border" />
+            </div>
+            :
+            <div>
+              {exercises.length === 0 ?
+                <p> You don't have any exercises... </p>
                 :
-                <div>
-                  {exercises.length === 0 ?
-                    <p> You don't have any exercises... </p>
-                    :
-                    <Row>
-                      {exercises.map((exercise, index) => {
-                        return (
-                          <Col md = {6} lg = {4} sm = {12} key = {index}>
-                            <Card className = "exercise-card-spacing">
-                              <Card.Header className = "exercise-header-padding">
-                                <Row>
-                                  <Col xs = {8}>
-                                    <p> {exercise.name} </p>
-                                  </Col>
-                                  <Col xs = {4}>
-                                    <Button className = "exercise-btn-option-align" variant = "outline-dark" size = "sm"
-                                      onClick = {() => {openDeleteModal(exercise.exercise_id)}}
-                                    >
-                                      🗑️
-                                    </Button>
-                                    <Button className = "exercise-btn-option-align" variant = "outline-dark" size = "sm"
-                                      onClick = {() => {openEditModal(exercise)}}
-                                    >
-                                      ✏️
-                                    </Button>
-                                  </Col>
-                                </Row>
-                              </Card.Header>
-                              <Card.Body className = "exercise-card-body-padding">
-                                <Card.Subtitle className = "mb-2 text-muted category-subtitle"> {exercise.category} </Card.Subtitle>
-                                {/*<Badge pill variant = "light"> {exercise.category} </Badge>*/}
-                                <ListGroup variant = "flush">
-                                  <ListGroup.Item>
-                                     Sets/Reps - {exercise.sets} x {exercise.reps}
-                                   </ListGroup.Item>
-                                   <ListGroup.Item>
-                                      Amount/Units - {exercise.amount} {exercise.units}
-                                   </ListGroup.Item>
-                                </ListGroup>
-                              </Card.Body>
-                            </Card>
-                          </Col>
-                        );
-                      })}
-                    </Row>
-                  }
-                </div>
+                <Row>
+                  {exercises.map((exercise, index) => {
+                    return (
+                      <Col md = {6} lg = {4} sm = {12} key = {index}>
+                        <Card className = "exercise-card-spacing">
+                          <Card.Header className = "exercise-header-padding">
+                            <Row>
+                              <Col xs = {8}>
+                                <p> {exercise.name} </p>
+                              </Col>
+                              <Col xs = {4}>
+                                <Button className = "exercise-btn-option-align" variant = "outline-dark" size = "sm"
+                                  onClick = {() => {openDeleteModal(exercise.exercise_id)}}
+                                >
+                                  🗑️
+                                </Button>
+                                <Button className = "exercise-btn-option-align" variant = "outline-dark" size = "sm"
+                                  onClick = {() => {openEditModal(exercise)}}
+                                >
+                                  ✏️
+                                </Button>
+                              </Col>
+                            </Row>
+                          </Card.Header>
+                          <Card.Body className = "exercise-card-body-padding">
+                            <Card.Subtitle className = "mb-2 text-muted category-subtitle"> {exercise.category} </Card.Subtitle>
+                            {/*<Badge pill variant = "light"> {exercise.category} </Badge>*/}
+                            <ListGroup variant = "flush">
+                              <ListGroup.Item>
+                                 Sets/Reps - {exercise.sets} x {exercise.reps}
+                               </ListGroup.Item>
+                               <ListGroup.Item>
+                                  Amount/Units - {exercise.amount} {exercise.units}
+                               </ListGroup.Item>
+                            </ListGroup>
+                          </Card.Body>
+                        </Card>
+                      </Col>
+                    );
+                  })}
+                </Row>
               }
-            </Card.Body>
-          </Card>
+            </div>
+          }
         </Col>
       </Row>
     </Container>

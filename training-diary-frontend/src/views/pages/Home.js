@@ -17,6 +17,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 /* Application imports */
 import Exercises from '../components/Exercises.js';
 import Activity from '../components/Activity.js';
+import Diet from '../components/Diet.js';
 
 /* Controller imports */
 const AUTH = require('../../controllers/auth.js');
@@ -29,6 +30,9 @@ function Home(props) {
       userInfo = {props.userInfo}
     />,
     <Exercises
+      userInfo = {props.userInfo}
+    />,
+    <Diet
       userInfo = {props.userInfo}
     />
   ];
@@ -55,8 +59,8 @@ function Home(props) {
               </Nav>
               <Nav className="mr-auto">
               </Nav>
-              <Nav className = "option-nav">
-                <Nav.Link> Profile </Nav.Link>
+              <Nav>
+                <Button variant = "outline-dark"> Profile </Button>
               </Nav>
             </Navbar.Collapse>
           </Navbar>

@@ -75,6 +75,6 @@ export const exerciseMetaData = {
     editable: true,
     displayName: "Units",
     elementType: "select",
-    options: ["lbs.", "kgs."]
+    options: ["lbs.", "kgs.", "miles", "meters", "kilometers"]
   }
 };

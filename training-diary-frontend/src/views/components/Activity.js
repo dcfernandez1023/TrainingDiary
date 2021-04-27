@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 
 /* Style imports */
-//import 'react-calendar/dist/Calendar.css';
 import '../../styles/activity.css';
 
 /* React bootstrap imports */
@@ -42,12 +41,32 @@ function Activity() {
 
   return (
     <Container>
-      <Calendar
-        onChange = {setSelectedDate}
-        value = {selectedDate}
-        view = "month"
-        showNeighboringMonth = {false}
-      />
+      <Row>
+        <Col xs = {10}>
+          <h4> Activity 🏃 </h4>
+        </Col>
+        <Col xs = {2}>
+          <Button className = "add-exercise-button" variant = "outline-dark"> + </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Badge className = "badge-spacing" pill variant = "dark"> 🔥 Activity Streak: 3 </Badge>
+          <Badge className = "badge-spacing" pill variant = "dark"> 🏆 Active Days: 3/30 </Badge>
+        </Col>
+      </Row>
+      <br/>
+      <Row>
+        <Col>
+          <Calendar
+            onChange = {setSelectedDate}
+            value = {selectedDate}
+            view = "month"
+            showNeighboringMonth = {false}
+            tileClassName = "custom-tile"
+          />
+        </Col>
+      </Row>
     </Container>
   );
 }

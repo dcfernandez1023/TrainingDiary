@@ -48,13 +48,12 @@ function App() {
               <Login/>
             </body>
           :
-          <Home
-            userInfo = {userInfo}
-          />
+          <body className = "home-background-color home-overflow">
+            <Home
+              userInfo = {userInfo}
+            />
+          </body>
           }
-        </Route>
-        <Route exact path = "/activityAndInsights">
-
         </Route>
       </Switch>
     </Router>
