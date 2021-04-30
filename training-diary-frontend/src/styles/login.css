@@ -18,6 +18,7 @@
   height: 25px;
 }
 
-.login-background-color {
+.login-background {
   background-color: #A2D9CE;
+  height: 100vh;
 }

@@ -44,7 +44,7 @@ function App() {
       <Switch>
         <Route exact path = "/">
           {userInfo === null ?
-            <body className = "login-background-color">
+            <body className = "login-background">
               <Login/>
             </body>
           :

@@ -1,8 +1,16 @@
-div, p, h1, h2, h3, h5 {
+p, h1, h2, h3, h5 {
     margin: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+}
+
+.create-new-button {
+  margin-left: 8px;
+}
+
+.existing-or-create {
+  text-align: center;
 }
 
 .category-subtitle {

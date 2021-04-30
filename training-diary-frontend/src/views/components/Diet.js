@@ -11,6 +11,8 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
 
 
 function Diet(props) {
@@ -31,13 +33,32 @@ function Diet(props) {
         </Row>
         <br/>
         <Row>
-          {dietEntries === undefined ?
-            <p> You have no diet entries... </p>
-            :
             <Col>
-              You have diet entries
+              <Tabs defaultActiveKey = "logs">
+                <Tab eventKey = "logs" title = "Logs">
+                  <br/>
+                  <Row>
+                    {dietEntries === undefined ?
+                      <Col>
+                        You have no diet entries...
+                      </Col>
+                      :
+                      <Col>
+                        You have diet entries
+                      </Col>
+                    }
+                  </Row>
+                </Tab>
+                <Tab eventKey = "insights" title = "Insights">
+                  <br/>
+                  <Row>
+                    <Col>
+                      Insights coming soon...
+                    </Col>
+                  </Row>
+                </Tab>
+              </Tabs>
             </Col>
-          }
         </Row>
       </Container>
     );

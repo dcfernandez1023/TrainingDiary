@@ -11,6 +11,8 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 /* Misc */
 import Calendar from 'react-calendar';
@@ -46,7 +48,7 @@ function Activity() {
           <h4> Activity 🏃 </h4>
         </Col>
         <Col xs = {2}>
-          <Button className = "add-exercise-button" variant = "outline-dark"> + </Button>
+          <Button className = "add-activity-button" variant = "outline-dark"> + </Button>
         </Col>
       </Row>
       <Row>

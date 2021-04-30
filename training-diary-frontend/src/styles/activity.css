@@ -18,6 +18,10 @@
   margin: 10px;
 }
 
+.badge-align {
+  text-align: left;
+}
+
 /* Calendar */
 
 .react-calendar {

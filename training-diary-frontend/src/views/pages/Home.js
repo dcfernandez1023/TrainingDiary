@@ -12,6 +12,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 /* Application imports */
@@ -60,7 +61,33 @@ function Home(props) {
               <Nav className="mr-auto">
               </Nav>
               <Nav>
-                <Button variant = "outline-dark"> Profile </Button>
+                <Dropdown>
+                  <Dropdown.Toggle variant = "light">
+                    👤
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu align = "right" style = {{width: "280px", height: "100px", border: "1px solid gray"}}>
+                    <Row>
+                      <Col style = {{textAlign: "center"}}>
+                        <Row style = {{marginBottom: "15px"}}>
+                          <Col>
+                            <p>
+                              {props.userInfo === undefined ? "" : props.userInfo.email}
+                            </p>
+                          </Col>
+                        </Row>
+                        <Row>
+                          <Col style = {{textAlign: "center"}}>
+                            <Button size = "sm"
+                              onClick = {() => {AUTH.signout()}}
+                            >
+                              Signout
+                            </Button>
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                  </Dropdown.Menu>
+                </Dropdown>
               </Nav>
             </Navbar.Collapse>
           </Navbar>

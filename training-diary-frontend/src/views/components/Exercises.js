@@ -13,11 +13,16 @@ import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Badge from 'react-bootstrap/Badge';
+import Tabs from 'react-bootstrap/Tabs';
+import Tab from 'react-bootstrap/Tab';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 /* Application imports */
 import AddExerciseModal from './AddExerciseModal.js';
 import DeleteModal from './DeleteModal.js';
 import EditExerciseModal from './EditExerciseModal.js';
+import LogExerciseModal from './LogExerciseModal.js';
 
 /* Controller imports */
 const EXERCISE_CONTROLLER = require('../../controllers/exerciseController.js');
@@ -30,6 +35,7 @@ function Exercises(props) {
   const[addShow, setAddShow] = useState(false);
   const[deleteShow, setDeleteShow] = useState(false);
   const[editShow, setEditShow] = useState(false);
+  const[logShow, setLogShow] = useState(false);
   const[exerciseToEdit, setExerciseToEdit] = useState();
   const[exerciseToDelete, setExerciseToDelete] = useState();
 
@@ -144,13 +150,21 @@ function Exercises(props) {
   }
 
   const openEditModal = (exercise) => {
-    setExerciseToEdit(exercise);
     setEditShow(true);
+    setExerciseToEdit(exercise);
   }
 
   const closeEditModal = () => {
-    setExerciseToEdit();
     setEditShow(false);
+    setExerciseToEdit();
+  }
+
+  const openLogModal = () => {
+    setLogShow(true);
+  }
+
+  const closeLogModal = () => {
+    setLogShow(false);
   }
 
   return (
@@ -174,72 +188,102 @@ function Exercises(props) {
         header = "Delete Exercise"
         prompt = "Are you sure you want to delete this exercise?"
       />
+      <LogExerciseModal
+        show = {logShow}
+        closeModal = {closeLogModal}
+        exercises = {exercises}
+        addExercise = {openAddModal}
+      />
       <Row>
-        <Col xs = {10}>
+        <Col xs = {8}>
           <h4> Exercises 💪 </h4>
         </Col>
-        <Col xs = {2}>
-          <Button className = "add-exercise-button" variant = "outline-dark" onClick = {openAddModal}> + </Button>
+        <Col xs = {4}>
+          <DropdownButton title = "⚙️" variant = "outline-dark" menuAlign = "right" className = "add-exercise-button" >
+            <Dropdown.Item onClick = {() => {openLogModal()}}> Log an Exercise </Dropdown.Item>
+            <Dropdown.Item onClick = {() => {openAddModal()}}> Create an Exercise </Dropdown.Item>
+          </DropdownButton>
         </Col>
       </Row>
       <br/>
-      <Row>
-        <Col>
-          {exercises === undefined ?
-            <div className = "exercise-spinner-align">
-              <Spinner animation = "border" />
-            </div>
-            :
-            <div>
-              {exercises.length === 0 ?
-                <p> You don't have any exercises... </p>
+      <Tabs defaultActiveKey = "yourExercises">
+        <Tab eventKey = "yourExercises" title = "Your Exercises">
+          <br/>
+          <Row>
+            <Col>
+              {exercises === undefined ?
+                <div className = "exercise-spinner-align">
+                  <Spinner animation = "border" />
+                </div>
                 :
-                <Row>
-                  {exercises.map((exercise, index) => {
-                    return (
-                      <Col md = {6} lg = {4} sm = {12} key = {index}>
-                        <Card className = "exercise-card-spacing">
-                          <Card.Header className = "exercise-header-padding">
-                            <Row>
-                              <Col xs = {8}>
-                                <p> {exercise.name} </p>
-                              </Col>
-                              <Col xs = {4}>
-                                <Button className = "exercise-btn-option-align" variant = "outline-dark" size = "sm"
-                                  onClick = {() => {openDeleteModal(exercise.exercise_id)}}
-                                >
-                                  🗑️
-                                </Button>
-                                <Button className = "exercise-btn-option-align" variant = "outline-dark" size = "sm"
-                                  onClick = {() => {openEditModal(exercise)}}
-                                >
-                                  ✏️
-                                </Button>
-                              </Col>
-                            </Row>
-                          </Card.Header>
-                          <Card.Body className = "exercise-card-body-padding">
-                            <Card.Subtitle className = "mb-2 text-muted category-subtitle"> {exercise.category} </Card.Subtitle>
-                            {/*<Badge pill variant = "light"> {exercise.category} </Badge>*/}
-                            <ListGroup variant = "flush">
-                              <ListGroup.Item>
-                                 Sets/Reps - {exercise.sets} x {exercise.reps}
-                               </ListGroup.Item>
-                               <ListGroup.Item>
-                                  Amount/Units - {exercise.amount} {exercise.units}
-                               </ListGroup.Item>
-                            </ListGroup>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    );
-                  })}
-                </Row>
+                <div>
+                  {exercises.length === 0 ?
+                    <p> You don't have any exercises... </p>
+                    :
+                    <Row>
+                      {exercises.map((exercise, index) => {
+                        return (
+                          <Col md = {6} lg = {4} sm = {12} key = {index}>
+                            <Card className = "exercise-card-spacing">
+                              <Card.Header className = "exercise-header-padding">
+                                <Row>
+                                  <Col xs = {8}>
+                                    <p> {exercise.name} </p>
+                                  </Col>
+                                  <Col xs = {4}>
+                                    <Button className = "exercise-btn-option-align" variant = "outline-dark" size = "sm"
+                                      onClick = {() => {openDeleteModal(exercise.exercise_id)}}
+                                    >
+                                      🗑️
+                                    </Button>
+                                    <Button className = "exercise-btn-option-align" variant = "outline-dark" size = "sm"
+                                      onClick = {() => {openEditModal(exercise)}}
+                                    >
+                                      ✏️
+                                    </Button>
+                                  </Col>
+                                </Row>
+                              </Card.Header>
+                              <Card.Body className = "exercise-card-body-padding">
+                                <Card.Subtitle className = "mb-2 text-muted category-subtitle"> {exercise.category} </Card.Subtitle>
+                                {/*<Badge pill variant = "light"> {exercise.category} </Badge>*/}
+                                <ListGroup variant = "flush">
+                                  <ListGroup.Item>
+                                     Sets/Reps - {exercise.sets} x {exercise.reps}
+                                   </ListGroup.Item>
+                                   <ListGroup.Item>
+                                      Amount/Units - {exercise.amount} {exercise.units}
+                                   </ListGroup.Item>
+                                </ListGroup>
+                              </Card.Body>
+                            </Card>
+                          </Col>
+                        );
+                      })}
+                    </Row>
+                  }
+                </div>
               }
-            </div>
-          }
-        </Col>
-      </Row>
+            </Col>
+          </Row>
+        </Tab>
+        <Tab eventKey = "logs" title = "Logs">
+          <br/>
+          <Row>
+            <Col>
+              Logs coming soon...
+            </Col>
+          </Row>
+        </Tab>
+        <Tab eventKey = "insights" title = "Insights">
+          <br/>
+          <Row>
+            <Col>
+              Insights coming soon...
+            </Col>
+          </Row>
+        </Tab>
+      </Tabs>
     </Container>
   );
 }
