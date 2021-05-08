@@ -13,6 +13,9 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
 
+/* Model imports */
+const ENTRY_MODEL = require('../../models/exerciseEntry.js');
+
 
 function LogExerciseModal(props) {
 
@@ -37,6 +40,26 @@ function LogExerciseModal(props) {
       logMapCopy[exercise_id] = true;
     }
     setLogMap(logMapCopy);
+  }
+
+  const onClickLog = () => {
+    if(props.userInfo === null || props.userInfo === undefined) {
+      alert("Error: Could not log your exercises.");
+      return;
+    }
+    var logs = [];
+    var date = new Date();
+    for(var key in logMap) {
+      var log = Object.assign({}, ENTRY_MODEL.exerciseEntry);
+      log.exercise_id = key;
+      log.timestamp = date.getTime();
+      log.day = date.getDate();
+      log.month = date.getMonth();
+      log.year = date.getFullYear();
+      log.user_id = props.userInfo.uid;
+      logs.push(log);
+    }
+    props.logExercises(logs, handleClose);
   }
 
   return (
@@ -76,6 +99,7 @@ function LogExerciseModal(props) {
                               variant = {logMap[exercise.exercise_id] ? "info" : ""}
                               action
                               onClick = {() => {updateLogMap(exercise.exercise_id)}}
+                              key = {exercise.exercise_id}
                             >
                               {exercise.name} | {exercise.category} | {exercise.sets} x {exercise.reps} of {exercise.amount} {exercise.units}
                             </ListGroup.Item>
@@ -93,7 +117,9 @@ function LogExerciseModal(props) {
         <Button variant = "secondary" onClick = {handleClose}>
           Close
         </Button>
-        <Button variant = "success" disabled = {Object.keys(logMap).length === 0}>
+        <Button variant = "success" disabled = {Object.keys(logMap).length === 0}
+          onClick = {() => {onClickLog()}}
+        >
           Log Exercises
         </Button>
       </Modal.Footer>

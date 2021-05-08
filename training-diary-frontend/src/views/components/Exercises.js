@@ -32,6 +32,7 @@ const LOCALSTORAGE = require('../../controllers/localStorageHelper.js');
 function Exercises(props) {
 
   const[exercises, setExercises] = useState();
+  const[exerciseLog, setExerciseLog] = useState();
   const[addShow, setAddShow] = useState(false);
   const[deleteShow, setDeleteShow] = useState(false);
   const[editShow, setEditShow] = useState(false);
@@ -41,6 +42,7 @@ function Exercises(props) {
 
   useEffect(() => {
     getExercises();
+    getExerciseLog();
   }, [props.userInfo]);
 
   const getExercises = () => {
@@ -55,6 +57,20 @@ function Exercises(props) {
       return;
     }
     EXERCISE_CONTROLLER.getExercises(props.userInfo.uid, token, callback, callbackOnError);
+  }
+
+  const getExerciseLog = () => {
+    var token = LOCALSTORAGE.getStorageItem("training-diary-token");
+    const callback = (res) => {
+      setExerciseLog(res.data.data);
+    }
+    const callbackOnError = (error) => {
+      console.log(error);
+    }
+    if(props.userInfo === undefined || props.userInfo === null) {
+      return;
+    }
+    EXERCISE_CONTROLLER.getExerciseLog(props.userInfo.uid, token, callback, callbackOnError);
   }
 
   const createExercise = (exercise, modalCallback) => {
@@ -78,6 +94,37 @@ function Exercises(props) {
       modalCallback();
     }
     EXERCISE_CONTROLLER.createExercise(props.userInfo.uid, token, exercise, callback, callbackOnError);
+  }
+
+  const logExercises = (logs, modalCallback) => {
+    if(props.userInfo === undefined || props.userInfo === null) {
+      return;
+    }
+    if(logs === undefined || logs === null || logs.length === 0) {
+      return;
+    }
+    var token = LOCALSTORAGE.getStorageItem("training-diary-token");
+    const callback = (res, loggedExercises) => {
+      var ids = res.data.data;
+      if(ids.length !== loggedExercises.length) {
+        alert("There was an unexpected error in logging your exercises...");
+        modalCallback();
+        return;
+      }
+      var exerciseLogCopy = exerciseLog.slice();
+      for(var i = 0; i < loggedExercises.length; i++) {
+        var log = loggedExercises[i];
+        log.exercise_entry_id = ids[i];
+        exerciseLogCopy.push(log);
+      }
+      setExerciseLog(exerciseLogCopy);
+      modalCallback();
+    }
+    const callbackOnError = (error) => {
+      console.log(error);
+      modalCallback();
+    }
+    EXERCISE_CONTROLLER.logExercises(props.userInfo.uid, token, logs, callback, callbackOnError);
   }
 
   const editExercise = (exercise, modalCallback) => {
@@ -193,6 +240,8 @@ function Exercises(props) {
         closeModal = {closeLogModal}
         exercises = {exercises}
         addExercise = {openAddModal}
+        logExercises = {logExercises}
+        userInfo = {props.userInfo}
       />
       <Row>
         <Col xs = {8}>
@@ -271,7 +320,13 @@ function Exercises(props) {
           <br/>
           <Row>
             <Col>
-              Logs coming soon...
+              {exerciseLog === undefined ?
+                <div className = "exercise-spinner-align">
+                  <Spinner animation = "border" />
+                </div>
+                :
+                <div> Logs coming soon... </div>
+              }
             </Col>
           </Row>
         </Tab>

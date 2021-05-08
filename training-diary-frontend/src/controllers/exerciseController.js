@@ -17,6 +17,20 @@ export const getExercises = (user_id, token, callback, callbackOnError) => {
   );
 }
 
+export const getExerciseLog = (user_id, token, callback, callbackOnError) => {
+  var config = {
+    headers: {"user_id": user_id, token: token}
+  };
+  axios.get(BASE_URL + "/api/exercise/getEntries", config)
+    .then((res) => {
+      callback(res);
+      LOCALSTORAGE.setStorageItem("training-diary-token", res.headers.token);
+    }, (error) => {
+      callbackOnError(error);
+    }
+  );
+}
+
 export const createExercise = (user_id, token, exercise, callback, callbackOnError) => {
   var config = {
     headers: {"user_id": user_id, token: token}
@@ -28,6 +42,22 @@ export const createExercise = (user_id, token, exercise, callback, callbackOnErr
   axios.post(BASE_URL + "/api/exercise/postExercise", body, config)
     .then((res) => {
       callback(res, exercise);
+      LOCALSTORAGE.setStorageItem("training-diary-token", res.headers.token);
+    }, (error) => {
+      callbackOnError(error);
+    });
+}
+
+export const logExercises = (user_id, token, logs, callback, callbackOnError) => {
+  var config = {
+    headers: {"user_id": user_id, token: token}
+  };
+  var body = {
+    data: logs
+  };
+  axios.post(BASE_URL + "/api/exercise/postEntries", body, config)
+    .then((res) => {
+      callback(res, logs);
       LOCALSTORAGE.setStorageItem("training-diary-token", res.headers.token);
     }, (error) => {
       callbackOnError(error);
