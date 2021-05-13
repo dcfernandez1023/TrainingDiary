@@ -14,6 +14,7 @@ import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import Spinner from 'react-bootstrap/Spinner';
 
 /* Application imports */
 import Exercises from '../components/Exercises.js';
@@ -22,6 +23,7 @@ import Diet from '../components/Diet.js';
 
 /* Controller imports */
 const AUTH = require('../../controllers/auth.js');
+const LOCALSTORAGE = require('../../controllers/localStorageHelper.js');
 
 
 function Home(props) {
@@ -38,8 +40,36 @@ function Home(props) {
     />
   ];
 
-  const[currentTab, setCurrentTab] = useState(0);
+  const[currentTab, setCurrentTab] = useState();
 
+  useEffect(() => {
+    getLastVisitedTab();
+  }, []);
+
+  const getLastVisitedTab = () => {
+    var last = LOCALSTORAGE.getStorageItem("td-last-visited-tab");
+    if(last === null || last === undefined) {
+      LOCALSTORAGE.setStorageItem("td-last-visited-tab", currentTab);
+      setCurrentTab(0);
+    }
+    else {
+      var parsedLast = parseInt(last);
+      if(!isNaN(parsedLast) && parsedLast >= 0 && parsedLast <= 4) {
+        setCurrentTab(parsedLast);
+      }
+      else {
+        setCurrentTab(0);
+      }
+    }
+  }
+
+  if(currentTab === undefined) {
+    return (
+      <div className = "spinner-align">
+        <Spinner animation = "border" />
+      </div>
+    );
+  }
 
   return (
     <Container fluid>
@@ -49,8 +79,12 @@ function Home(props) {
             <Navbar.Brand href = "/"> TrainingDiary </Navbar.Brand>
             <Navbar.Toggle aria-controls = "responsive-navbar-nav" />
             <Navbar.Collapse id = "responsive-navbar-nav">
-              <Nav defaultActiveKey = {0} className = "option-nav"
-                onSelect = {(eventKey) => {setCurrentTab(eventKey)}}
+              <Nav defaultActiveKey = {currentTab} className = "option-nav"
+                onSelect = {(eventKey) => {
+                  setCurrentTab(eventKey);
+                  LOCALSTORAGE.setStorageItem("td-last-visited-tab", eventKey);
+                }
+              }
               >
                 <Nav.Link eventKey = {0}> Activity </Nav.Link>
                 <Nav.Link eventKey = {1}> Exercise </Nav.Link>

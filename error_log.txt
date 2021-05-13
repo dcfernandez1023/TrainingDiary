@@ -134,3 +134,27 @@ Traceback (most recent call last):
 psycopg2.errors.NumericValueOutOfRange: integer out of range
 -----------END-----------
 
+----------START----------
+##2021-05-12 23:14:23
+Traceback (most recent call last):
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\controllers\ExerciseController.py", line 37, in get_entries_by_user
+    data = self.__exercise.get_user_exercise_entries(user_id)
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\models\Exercise.py", line 60, in get_user_exercise_entries
+    data = self.__db.get_data(query)
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\db\DbAccess.py", line 44, in get_data
+    self.__connection.commit()
+AttributeError: 'NoneType' object has no attribute 'commit'
+-----------END-----------
+
+----------START----------
+##2021-05-12 23:32:30
+Traceback (most recent call last):
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\controllers\ExerciseController.py", line 37, in get_entries_by_user
+    data = self.__exercise.get_user_exercise_entries(user_id)
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\models\Exercise.py", line 60, in get_user_exercise_entries
+    data = self.__db.get_data(query)
+  File "C:\Users\domin\TrainingDiary\training-diary-backend\db\DbAccess.py", line 44, in get_data
+    self.__connection.commit()
+psycopg2.InterfaceError: connection already closed
+-----------END-----------
+

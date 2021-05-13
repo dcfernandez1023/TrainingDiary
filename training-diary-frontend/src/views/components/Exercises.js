@@ -33,6 +33,7 @@ function Exercises(props) {
 
   const[exercises, setExercises] = useState();
   const[exerciseLog, setExerciseLog] = useState();
+  const[exerciseLookup, setExerciseLookup] = useState({});
   const[addShow, setAddShow] = useState(false);
   const[deleteShow, setDeleteShow] = useState(false);
   const[editShow, setEditShow] = useState(false);
@@ -45,10 +46,20 @@ function Exercises(props) {
     getExerciseLog();
   }, [props.userInfo]);
 
+  const createExerciseLookup = (exercises) => {
+    var lookup = {};
+    for(var index in exercises) {
+      var exercise = exercises[index];
+      lookup[exercise.exercise_id] = exercise;
+    }
+    setExerciseLookup(lookup);
+  }
+
   const getExercises = () => {
     var token = LOCALSTORAGE.getStorageItem("training-diary-token");
     const callback = (res) => {
       setExercises(res.data.data);
+      createExerciseLookup(res.data.data);
     }
     const callbackOnError = (error) => {
       console.log(error);
@@ -325,7 +336,28 @@ function Exercises(props) {
                   <Spinner animation = "border" />
                 </div>
                 :
-                <div> Logs coming soon... </div>
+                <div>
+                  {exerciseLog.length === 0 ?
+                    <Row>
+                      <Col>
+                        <h4> You have not logged any exercises </h4>
+                      </Col>
+                    </Row>
+                    :
+                    <Row>
+                      {exerciseLog.map((log) => {
+                        console.log(log);
+                        return (
+                          <Col md = {12}>
+                            <p>
+                              {new Date(log.timestamp).toLocaleDateString()} | {log.exercise_entry_id} | {log.exercise_id}
+                            </p>
+                          </Col>
+                        );
+                      })}
+                    </Row>
+                  }
+                </div>
               }
             </Col>
           </Row>
